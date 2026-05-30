@@ -14,4 +14,32 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Shuttle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Passenger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ShuttleList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PassList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Route.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RoutePlanner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>
