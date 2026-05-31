@@ -21,6 +21,8 @@
   <ItemGroup>
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Passenger.cpp" />
+    <ClCompile Include="Shuttle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h" />
