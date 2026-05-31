@@ -20,8 +20,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Lists.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Passenger.cpp" />
+    <ClCompile Include="Route.cpp" />
+    <ClCompile Include="RoutePlanner.cpp" />
     <ClCompile Include="Shuttle.cpp" />
   </ItemGroup>
   <ItemGroup>
