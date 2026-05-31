@@ -15,7 +15,7 @@ public:
 	virtual ~Entity() = default;
 
 	virtual void displayInfo() const;
-	string getId() const { return id; }
-	string getDest() const { return dest; }
-	time_t getTime() const { return time; }
+	string getId() const;
+	string getDest() const;
+	time_t getTime() const;
 };

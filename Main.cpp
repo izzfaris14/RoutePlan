@@ -12,7 +12,7 @@ int main() {
 
 	planner.generateMatches();
 
-	time_t currentTIme = time(nullptr);
+	time_t currentTime = time(nullptr);
 	planner.editRAMShuttle("511", "School", currentTime);
 	planner.editRAMPassenger("P01", "Supermarket", currentTime);
 

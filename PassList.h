@@ -9,5 +9,5 @@ class PassList {
 	vector<Passenger> passFile;
 public:
 	void loadFromFile(string fileName);
-	vector<Passenger>& getPassengers() { return passFile; }
+	vector<Passenger>& getPassengers();
 };
