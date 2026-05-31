@@ -11,7 +11,7 @@ class Entity {
 	time_t time;
 
 public:
-	Entity(string id, string dest, time_t time) : id(id), dest(dest), time(time) {}
+	Entity(string id, string dest, time_t time);
 	virtual ~Entity() = default;
 
 	virtual void displayInfo() const;

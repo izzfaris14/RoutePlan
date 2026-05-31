@@ -9,5 +9,5 @@ class ShuttleList {
 	vector<Shuttle> shuttleFile;
 public:
 	void loadFromFile(string fileName);
-	vector<Shuttle> getShuttles() const { return shuttleFile; }
+	vector<Shuttle>& getShuttles();
 };

@@ -47,9 +47,11 @@ void PassList::loadFromFile(string fileName) {
 	}
 	string line, id, dest, timeStr;
 
-	getline(ss, id, ',');//read time
-	getline(ss, dest, ',');//read destination
-	getline(ss, timeStr, ',');//read time
+	while(getline(file, line)) {
+		stringstream ss(line);
+		getline(ss, id, ',');//read time
+		getline(ss, dest, ',');//read destination
+		getline(ss, timeStr, ',');//read time
 
 	if (!id.empty() && !dest.empty()) {
 		passFile.push_back(Passenger(id, dest, parseTimeStr(timeStr)));
