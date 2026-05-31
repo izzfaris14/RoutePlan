@@ -10,7 +10,7 @@ using namespace std;
 
 //helper function to convert time to string
 time_t parseTimeStr(const string& timeStr) {
-	return time(0); //returning time as a placeholder, implement actual parsing logic as needed
+	return time(nullptr); //returning time as a placeholder, implement actual parsing logic as needed
 }
 
 void ShuttleList::loadFromFile(string fileName) {
