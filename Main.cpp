@@ -1,6 +1,5 @@
 #include <iostream>
 #include "Routeplanner.h"
-
 using namespace std;
 
 int main() {
@@ -17,6 +16,6 @@ int main() {
 	planner.editRAMPassenger("P01", "Supermarket", currentTime);
 
 	planner.writeFile("matched_routes_output.txt");
-
+	cout << "test";
 
 }
