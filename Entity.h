@@ -8,14 +8,14 @@ using namespace std;
 class Entity {
 	string id;
 	string dest;
-	time_t time;
+	string timeStr;
 
 public:
-	Entity(string id, string dest, time_t time);
+	Entity(string id, string dest, string timeStr);
 	virtual ~Entity() = default;
 
 	virtual void displayInfo() const;
 	string getId() const;
 	string getDest() const;
-	time_t getTime() const;
+	string getTimeStr() const;
 };

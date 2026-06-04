@@ -12,5 +12,5 @@ class Route {
 public:
 	Route(Shuttle s, Passenger p);
 	string checkDest() const;
-	time_t checkTime() const;
+	string checkTime() const;
 };

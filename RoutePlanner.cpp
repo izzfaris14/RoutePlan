@@ -26,7 +26,7 @@ void RoutePlanner::generateMatches() {
 	cout << "Matched" << matchedRoutes.size() << " routes." << endl;
 }
 
-void RoutePlanner::editRAMShuttle(string id, string newDest, time_t newTime) {
+void RoutePlanner::editRAMShuttle(string id, string newDest, string newTime) {
 	cout << "Editing shuttle in RAM: ID=" << id << ", New Destination=" << newDest << ", New Time=" << newTime << endl;
 	for (auto& s : sManager.getShuttles()) {
 		if (s.getId() == id) {
@@ -38,7 +38,7 @@ void RoutePlanner::editRAMShuttle(string id, string newDest, time_t newTime) {
 	cout << "Shuttle with ID " << id << " not found." << endl;
 }
 
-void RoutePlanner::editRAMPassenger(string id, string newDest, time_t newTime) {
+void RoutePlanner::editRAMPassenger(string id, string newDest, string newTime) {
 	cout << "Editing passenger in RAM: ID=" << id << ", New Destination=" << newDest << ", New Time=" << newTime << endl;
 	for (auto& p : pManager.getPassengers()) {
 		if (p.getId() == id) {

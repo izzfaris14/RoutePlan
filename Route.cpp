@@ -11,7 +11,7 @@ string Route::checkDest() const {
 	}
 }
 
-time_t Route::checkTime() const {
+string Route::checkTime() const {
 	//return appropriate time logic
-	return sManage.getTime();
+	return sManage.getTimeStr();
 }

@@ -4,12 +4,12 @@
 
 using namespace std;
 
-Entity::Entity(string id, string dest, time_t time) : id(id), dest(dest), time(time) {}
+Entity::Entity(string id, string dest, string timeStr)  : id(id), dest(dest), timeStr(timeStr) {}
 
 void Entity::displayInfo() const {
 	cout << "ID: " << id << endl;
 	cout << "Destination: " << dest << endl;
-	cout << "Time: " << ctime(&time);
+	cout << "Time: " << timeStr << endl;
 }
 
 string Entity::getId() const {
@@ -20,7 +20,7 @@ string Entity::getDest() const {
 	return dest;
 }
 
-time_t Entity::getTime() const {
-	return time;
+string Entity::getTimeStr() const {
+	return timeStr;
 }
 

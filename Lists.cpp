@@ -1,4 +1,3 @@
-//combined PassList & ShuttleList
 
 #include<iostream>
 #include "ShuttleList.h"
@@ -8,9 +7,9 @@
 
 using namespace std;
 
-//helper function to convert time to string
-time_t parseTimeStr(const string& timeStr) {
-	return time(nullptr); //returning time as a placeholder, implement actual parsing logic as needed
+
+string parseTimeStr(const string& timeStr) {
+	return timeStr;
 }
 
 void ShuttleList::loadFromFile(string fileName) {
@@ -23,9 +22,9 @@ void ShuttleList::loadFromFile(string fileName) {
 	while (getline(file, line)) {
 		stringstream ss(line);
 
-		getline(ss, id, ','); //read time
-		getline(ss, dest, ','); //read destination
-		getline(ss, timeStr, ',');//read time
+		getline(ss, id, ',');
+		getline(ss, dest, ',');
+		getline(ss, timeStr, ',');
 	}
 
 	if (!id.empty() && !dest.empty()) {
@@ -49,9 +48,9 @@ void PassList::loadFromFile(string fileName) {
 
 	while (getline(file, line)) {
 		stringstream ss(line);
-		getline(ss, id, ',');//read time
-		getline(ss, dest, ',');//read destination
-		getline(ss, timeStr, ',');//read time
+		getline(ss, id, ',');
+		getline(ss, dest, ',');
+		getline(ss, timeStr, ',');
 
 		if (!id.empty() && !dest.empty()) {
 			passFile.push_back(Passenger(id, dest, parseTimeStr(timeStr)));

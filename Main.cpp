@@ -10,10 +10,8 @@ int main() {
 	planner.readFile("system_data");
 
 	planner.generateMatches();
-
-	time_t currentTime = time(nullptr);
-	planner.editRAMShuttle("511", "School", currentTime);
-	planner.editRAMPassenger("P01", "Supermarket", currentTime);
+	planner.editRAMShuttle("S01", "School", "7:15am");
+	planner.editRAMPassenger("P01", "Supermarket", "8:05am");
 
 	planner.writeFile("matched_routes_output.txt");
 

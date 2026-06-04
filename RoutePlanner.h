@@ -13,7 +13,7 @@ class RoutePlanner {
 public:
 	void readFile(string fileName);
 	void generateMatches();
-	void editRAMShuttle(string id, string newDest, time_t newTime);
-	void editRAMPassenger(string id, string newDest, time_t newTime);
+	void editRAMShuttle(string id, string newDest, string newTime);
+	void editRAMPassenger(string id, string newDest, string newTime);
 	void writeFile(string fileName);
 };

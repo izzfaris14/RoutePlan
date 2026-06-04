@@ -3,4 +3,5 @@
 
 using namespace std;
 
-Passenger::Passenger(string id, string dest, time_t time) : Entity(id, dest, time) {}
+Passenger::Passenger(string id, string dest, string timeStr) : Entity(id, dest, timeStr) {
+}
