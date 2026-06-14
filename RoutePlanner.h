@@ -5,15 +5,17 @@
 #include "PassList.h"
 #include "ShuttleList.h"
 #include "Route.h"
+#include "FileParser.h"
 
 class RoutePlanner {
 	PassList pManager;
 	ShuttleList sManager;
 	vector<Route> matchedRoutes;
 public:
-	void readFile(string fileName);
+	void initializeSystem(FileParser& parser);
+
 	void generateMatches();
-	void editRAMShuttle(string id, string newDest, string newTime);
-	void editRAMPassenger(string id, string newDest, string newTime);
-	void writeFile(string fileName);
+
+	void editShuttle(string id, string newDest, string newTime);
+	void editPassenger(string id, string newDest, string newTime);
 };
