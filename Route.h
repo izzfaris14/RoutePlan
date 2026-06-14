@@ -4,13 +4,11 @@
 #include"Shuttle.h"
 #include"Passenger.h"
 
-using namespace std;
-
 class Route {
-	Shuttle sManage;
-	Passenger pManage;
+	Shuttle* sManage; //pointer to reference an existing SHuttle
+	Passenger* pManage; //collection of Passenger pointers
 public:
-	Route(Shuttle s, Passenger p);
+	Route(Shuttle* s, vector<Passenger*> p);
 	string checkDest() const;
 	string checkTime() const;
 };
