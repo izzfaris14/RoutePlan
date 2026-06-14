@@ -14,7 +14,7 @@ public:
 	Entity(string id, string dest, string timeStr);
 	virtual ~Entity() = default;
 
-	virtual void displayInfo() const;
+	virtual string getDetails() const = 0;
 	string getId() const;
 	string getDest() const;
 	string getTimeStr() const;
