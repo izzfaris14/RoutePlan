@@ -3,11 +3,11 @@
 #include<string>
 #include"Passenger.h"
 
-using namespace std;
-
 class PassList {
-	vector<Passenger> passFile;
+	vector<Passenger> passDB;
 public:
 	void loadFromFile(string fileName);
-	vector<Passenger>& getPassengers();
+	const vector<Passenger>& getPassengers() const; //getter becomes encapsulation
+	Passenger getPassenger(int index) const;
+	void editPassenger(string id, Passenger updatedPassenger);
 };
