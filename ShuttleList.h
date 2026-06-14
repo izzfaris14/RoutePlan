@@ -3,11 +3,11 @@
 #include <string>
 #include "Shuttle.h"
 
-using namespace std;
-
 class ShuttleList {
-	vector<Shuttle> shuttleFile;
+	vector<Shuttle> shuttleDB;
 public:
 	void loadFromFile(string fileName);
-	vector<Shuttle>& getShuttles();
+	const vector<Shuttle>& getShuttleDB() const; //getter becomes encapsulation
+	Shuttle getShuttle(int index) const; 
+	void editShuttle(string id, Shuttle updatedShuttle);
 };
