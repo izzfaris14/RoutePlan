@@ -5,13 +5,16 @@ using namespace std;
 int main() {
 	FileParser parser;
 	cout << "Driverless Public Transport System" << endl;
+	vector<Shuttle> rawShuttles = parser.readShuttles("shuttle.txt");
+	vector<Passenger> rawPassengers = parser.readPassengers("passengers.txt");
 
-	RoutePlanner planner;
+	ShuttleList sList(rawShuttles);
+	PassList pList(rawPassengers);
+
+	RoutePlanner planner(sList, pList);
 
 	planner.generateMatches();
-	planner.editRAMPassenger("P01", "Supermarket", "8:05am");
 
-	planner.writeFile("matched_routes_output.txt");
-
+	cout << "System compiled successfully. Matches generated." << endl;
 
 }
