@@ -1,8 +1,9 @@
 #pragma once
-
+#include<string>
+#include<ctime>
 #include "Entity.h"
 
-using namespace std;
+
 
 class Shuttle : public Entity {
 public:
