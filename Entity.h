@@ -18,4 +18,5 @@ public:
 	string getId() const;
 	string getDest() const;
 	string getTimeStr() const;
+	string getDeets() const;
 };
