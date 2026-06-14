@@ -6,12 +6,6 @@ using namespace std;
 
 Entity::Entity(string id, string dest, string timeStr)  : id(id), dest(dest), timeStr(timeStr) {}
 
-void Entity::displayInfo() const {
-	cout << "ID: " << id << endl;
-	cout << "Destination: " << dest << endl;
-	cout << "Time: " << timeStr << endl;
-}
-
 string Entity::getId() const {
 	return id;
 }
