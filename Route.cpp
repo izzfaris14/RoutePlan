@@ -1,6 +1,6 @@
 #include "Route.h"
 
-Route::Route(Shuttle s, Passenger p) : sManage(s), pManage(p) {}
+Route::Route(Shuttle* s, vector<Passengers*> p) : sManage(s), pManage(p) {}
 
 string Route::checkDest() const {
 	//compare smanage.getDest() and pmanage.getDest()
