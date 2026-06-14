@@ -1,17 +1,21 @@
 #include "Route.h"
 
-Route::Route(Shuttle* s, vector<Passengers*> p) : sManage(s), pManage(p) {}
+ROute::ROute(Shuttle* s, vector<Passenger*> p) {
+	this->assignedShuttle = s;
+	this->assignedPassengers = p;
+}
 
 string Route::checkDest() const {
-	//compare smanage.getDest() and pmanage.getDest()
-	if (sManage.getDest() == pManage.getDest()) {
-		return "Destination matches: " + sManage.getDest();
-	} else {
-		return "Destination mismatch";
+	if (assignedPassengers.empty()) {
+		return "No passengers assigned.";
+}
+	if (assignedShuttle->getDest() == assignedPassengers[0]->getDest()) {
+		return "Destination mathces: " +assignedShuttle->getDest();
 	}
-}
+	else {
+		return "Destination mismatched";
+	}
 
-string Route::checkTime() const {
-	//return appropriate time logic
-	return sManage.getTimeStr();
-}
+	string Route::checkTime() const {
+		return assignedShuttle->getTimeStr();
+	}
