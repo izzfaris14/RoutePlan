@@ -21,13 +21,13 @@ int main() {
     int choice = 0;
     while (choice != 6) {
         cout << "\n==========================================" << endl;
-        cout << "  DRIVERLESS PUBLIC TRANSPORT SYSTEM RAM  " << endl;
+        cout << "  DRIVERLESS PUBLIC TRANSPORT SYSTEM  " << endl;
         cout << "==========================================" << endl;
         cout << "1. Generate Route Matches" << endl;
         cout << "2. Display Detailed Schedule" << endl;
         cout << "3. Display Unmatched Shuttles & Passengers" << endl;
         cout << "4. Save Schedule to File" << endl;
-        cout << "5. Edit Entities in RAM" << endl;
+        cout << "5. Edit Parameters in RAM" << endl;
         cout << "6. Exit System" << endl;
         cout << "Enter your choice: ";
 
