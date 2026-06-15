@@ -61,3 +61,40 @@ void RoutePlanner::writeFile(string fileName) {
     outFile.close();
     cout << "Matched routes written to file: " << fileName << endl;
 }
+
+void RoutePlanner::displayMatches() const {
+    if (matchedRoutes.empty()) {
+        cout << "No matches to display. Please generate matches first." << endl;
+        return;
+    }
+    cout << "\n=== DETAILED SCHEDULE ===" << endl;
+    for (const auto& route : matchedRoutes) {
+        cout << route.getRouteString() << endl;
+    }
+}
+
+void RoutePlanner::displayUnmatched() const {
+    cout << "\n=== UNMATCHED SHUTTLES ===" << endl;
+    for (const auto& s : sManager.getShuttles()) {
+        bool isMatched = false;
+        for (const auto& r : matchedRoutes) {
+            if (r.getShuttle()->getId() == s->getId()) {
+                isMatched = true;
+                break;
+            }
+        }
+        if (!isMatched) cout << s->getDeets() << endl;
+    }
+
+    cout << "\n=== UNMATCHED PASSENGERS ===" << endl;
+    for (const auto& p : pManager.getPassengers()) {
+        bool isMatched = false;
+        for (const auto& r : matchedRoutes) {
+            if (r.getPassenger()->getId() == p->getId()) {
+                isMatched = true;
+                break;
+            }
+        }
+        if (!isMatched) cout << p->getDeets() << endl;
+    }
+}

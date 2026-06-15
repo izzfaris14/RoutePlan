@@ -1,6 +1,6 @@
 #include "Route.h"
 
-// Fixed typo: ROute -> Route
+
 Route::Route(Shuttle* s, Passenger* p) {
     this->assignedShuttle = s;
     this->assignedPassenger = p;
@@ -18,8 +18,22 @@ string Route::checkDest() const {
     else {
         return "Destination mismatched";
     }
-} // <-- ADDED THIS MISSING BRACE!
+} 
 
 string Route::checkTime() const {
-    return assignedShuttle->getTimeStr(); // Assuming getTimeStr() exists in Shuttle.h
+    return assignedShuttle->getTimeStr(); 
+}
+
+string Route::getRouteString() const {
+    if (assignedShuttle == nullptr || assignedPassenger == nullptr) return "Invalid Route";
+    return "Shuttle " + assignedShuttle->getId() + " (" + assignedShuttle->getDest() + " @ " + assignedShuttle->getTimeStr() +
+        ") - Passenger " + assignedPassenger->getId() + " (" + assignedPassenger->getDest() + " @ " + assignedPassenger->getTimeStr() + ")";
+}
+
+Shuttle* Route::getShuttle() const {
+    return assignedShuttle;
+}
+
+Passenger* Route::getPassenger() const {
+    return assignedPassenger;
 }

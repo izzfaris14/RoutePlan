@@ -13,6 +13,9 @@ class Route {
 public:
     Route(Shuttle* s, Passenger* p);
 
+    string getRouteString() const;
+    Shuttle* getShuttle() const;
+    Passenger* getPassenger() const;
     string checkDest() const;
     string checkTime() const;
 };

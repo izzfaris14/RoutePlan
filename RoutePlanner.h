@@ -15,9 +15,13 @@ class RoutePlanner {
     vector<Route> matchedRoutes;
 public:
     RoutePlanner(ShuttleList sList, PassList pList);
-    void writeFile(string fileName);
+
     void initializeSystem(FileParser& parser);
     void generateMatches();
+    void displayMatches() const;
+    void displayUnmatched() const;
+    void writeFile(string fileName);
+
     void editShuttle(string id, string newDest, string newTime);
     void editPassenger(string id, string newDest, string newTime);
 };
