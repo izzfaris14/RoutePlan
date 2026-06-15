@@ -12,7 +12,7 @@ int main() {
     cout << "Loading System Data from files..." << endl;
 
     vector<Shuttle*> rawShuttles = parser.readShuttles("shuttle.txt");
-    vector<Passenger*> rawPassengers = parser.readPassengers("passengers.txt");
+    vector<Passenger*> rawPassengers = parser.readPassengers("passenger.txt");
 
     ShuttleList sList(rawShuttles);
     PassList pList(rawPassengers);
