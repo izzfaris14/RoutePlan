@@ -1,9 +1,13 @@
 #pragma once
-#include<string>
-#include<ctime>
+#include <string>
+#include <vector>
+#include "Passenger.h"
+#include "Shuttle.h"
+
+using namespace std;
 
 class FileParser {
 public:
-	vector<Passenger> loadPass(string fileName);
-	vector<Shuttle> loadShuttles(string fileName);
+    vector<Passenger*> readPassengers(string fileName);
+    vector<Shuttle*> readShuttles(string fileName);
 };

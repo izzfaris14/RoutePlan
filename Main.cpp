@@ -1,20 +1,26 @@
 #include <iostream>
-#include "Routeplanner.h"
+#include <vector>        
+#include "FileParser.h"   
+#include "ShuttleList.h"   
+#include "PassList.h"     
+#include "RoutePlanner.h"
+
 using namespace std;
 
 int main() {
-	FileParser parser;
-	cout << "Driverless Public Transport System" << endl;
-	vector<Shuttle> rawShuttles = parser.readShuttles("shuttle.txt");
-	vector<Passenger> rawPassengers = parser.readPassengers("passengers.txt");
+    FileParser parser;
+    cout << "Driverless Public Transport System" << endl;
 
-	ShuttleList sList(rawShuttles);
-	PassList pList(rawPassengers);
+    vector<Shuttle*> rawShuttles = parser.readShuttles("shuttle.txt");
+    vector<Passenger*> rawPassengers = parser.readPassengers("passenger.txt");
 
-	RoutePlanner planner(sList, pList);
+    ShuttleList sList(rawShuttles);
+    PassList pList(rawPassengers);
 
-	planner.generateMatches();
+    RoutePlanner planner(sList, pList);
+    planner.generateMatches();
 
-	cout << "System compiled successfully. Matches generated." << endl;
+    cout << "System compiled successfully. Matches generated." << endl;
 
+    return 0;
 }

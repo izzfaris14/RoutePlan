@@ -1,46 +1,53 @@
-
-#include<iostream>
+#include <iostream>
+#include <vector>
+#include <string>
 #include "ShuttleList.h"
 #include "PassList.h"
-#include <fstream>
-#include <sstream>
 
 using namespace std;
 
-ShuttleList::ShuttleList(vector<Shuttle> loadedData) {
-	shuttleDB = loadedData;
+// -- SHUTTLE LIST --
+ShuttleList::ShuttleList(vector<Shuttle*> loadedData) {
+    shuttleDB = loadedData;
 }
 
-Shuttle ShuttleList::getShuttle(int index) const {
-	return shuttleDB[index]; 
+const vector<Shuttle*>& ShuttleList::getShuttles() const {
+    return shuttleDB;
 }
 
-void ShuttleList::editShuttle(string id, Shuttle updated) {
-	for (int i = 0; i < shuttleDB.size(); i++) {
-		if (shuttleDB[i].getId() == id) {
-			shuttleDB[i] = updated;
-			break;
-		}
-	}
+Shuttle* ShuttleList::getShuttle(int index) const {
+    return shuttleDB[index];
 }
 
-PassList::PassList(vector<Passenger> loadedData) {
-	passDB = loadedData;
+void ShuttleList::editShuttle(string id, Shuttle* updated) {
+    for (int i = 0; i < shuttleDB.size(); i++) {
+        if (shuttleDB[i]->getId() == id) {
+            delete shuttleDB[i]; // Prevent memory leak
+            shuttleDB[i] = updated;
+            break;
+        }
+    }
 }
 
-vector<Passenger> PassList::getPassengers() const {
-	return passDB;
+// -- PASSENGER LIST --
+PassList::PassList(vector<Passenger*> loadedData) {
+    passDB = loadedData;
 }
 
-Passenger PassList::getPassenger(int index) const {
-	return passDB[index];
+const vector<Passenger*>& PassList::getPassengers() const {
+    return passDB;
 }
 
-void PassList::editPassenger(string id, Passenger updated) {
-	for (int i = 0; i < passDB.size(); i++) {
-		if (passDB[i].getId() == id) {
-			passDB[i] = updated;
-			break;
-		}
-	}
+Passenger* PassList::getPassenger(int index) const {
+    return passDB[index];
+}
+
+void PassList::editPassenger(string id, Passenger* updated) {
+    for (int i = 0; i < passDB.size(); i++) {
+        if (passDB[i]->getId() == id) {
+            delete passDB[i]; // Prevent memory leak
+            passDB[i] = updated;
+            break;
+        }
+    }
 }

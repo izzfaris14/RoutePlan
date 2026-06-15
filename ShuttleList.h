@@ -3,11 +3,16 @@
 #include <string>
 #include "Shuttle.h"
 
+using namespace std;
+
 class ShuttleList {
-	vector<Shuttle> shuttleDB;
+    vector<Shuttle*> shuttleDB; // changed to pointers
 public:
-	void loadFromFile(string fileName);
-	const vector<Shuttle>& getShuttles() const; //getter becomes encapsulation
-	Shuttle getShuttle(int index) const; 
-	void editShuttle(string id, Shuttle updatedShuttle);
+    // added missing constructor 
+    ShuttleList(vector<Shuttle*> loadedData);
+
+    void loadFromFile(string fileName);
+    const vector<Shuttle*>& getShuttles() const;
+    Shuttle* getShuttle(int index) const;
+    void editShuttle(string id, Shuttle* updatedShuttle);
 };

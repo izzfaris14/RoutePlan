@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="FileParser.cpp" />
     <ClCompile Include="Lists.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Passenger.cpp" />

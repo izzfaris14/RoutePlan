@@ -36,6 +36,9 @@
     <ClCompile Include="RoutePlanner.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="FileParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
