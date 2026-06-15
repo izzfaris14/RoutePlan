@@ -11,7 +11,7 @@ public:
     // added missing constructor 
     PassList(vector<Passenger*> loadedData);
 
-    void loadFromFile(string fileName);
+    //void loadFromFile(string fileName);
     const vector<Passenger*>& getPassengers() const;
     Passenger* getPassenger(int index) const;
     void editPassenger(string id, Passenger* updatedPassenger);

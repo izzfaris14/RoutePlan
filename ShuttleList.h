@@ -11,7 +11,7 @@ public:
     // added missing constructor 
     ShuttleList(vector<Shuttle*> loadedData);
 
-    void loadFromFile(string fileName);
+    //void loadFromFile(string fileName);
     const vector<Shuttle*>& getShuttles() const;
     Shuttle* getShuttle(int index) const;
     void editShuttle(string id, Shuttle* updatedShuttle);
