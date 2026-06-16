@@ -7,7 +7,6 @@ using namespace std;
 RoutePlanner::RoutePlanner(ShuttleList sList, PassList pList) : sManager(sList), pManager(pList) {}
 
 void RoutePlanner::initializeSystem(FileParser& parser) {
-   
 }
 
 void RoutePlanner::generateMatches() {
@@ -51,7 +50,7 @@ void RoutePlanner::writeFile(string fileName) {
 
     outFile << "=== FINAL TRANSIT SCHEDULE ===" << endl;
     for (const auto& route : matchedRoutes) {
-        // Now using the required detailed formatting for the text file
+       
         outFile << route.getRouteString() << endl;
     }
 
@@ -71,3 +70,27 @@ void RoutePlanner::displayMatches() const {
 }
 
 void RoutePlanner::displayUnmatched() const {
+    cout << "\n=== UNMATCHED SHUTTLES ===" << endl;
+    for (const auto& s : sManager.getShuttles()) {
+        bool isMatched = false;
+        for (const auto& r : matchedRoutes) {
+            if (r.getShuttle()->getId() == s->getId()) {
+                isMatched = true;
+                break;
+            }
+        }
+        if (!isMatched) cout << s->getDeets() << endl;
+    }
+
+    cout << "\n=== UNMATCHED PASSENGERS ===" << endl;
+    for (const auto& p : pManager.getPassengers()) {
+        bool isMatched = false;
+        for (const auto& r : matchedRoutes) {
+            if (r.getPassenger()->getId() == p->getId()) {
+                isMatched = true;
+                break;
+            }
+        }
+        if (!isMatched) cout << p->getDeets() << endl;
+    }
+}
