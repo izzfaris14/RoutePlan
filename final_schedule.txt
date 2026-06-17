@@ -1,23 +1,8 @@
-Destination matches: Supermarket, 2:30pm
-Destination matches: Residential_01, 9:35pm
-Destination matches: School, 7:15am
-Destination matches: Bank, 10:45am
-Destination matches: Residential_02, 11:00am
-Destination matches: Cinema, 8:35pm
-Destination matches: Mall, 7:10pm
-Destination matches: PostOffice, 12:35pm
-Destination matches: Residential_04, 7:45pm
-Destination matches: Residential_03, 4:05pm
-Destination matches: TownCouncil, 10:10am
-Destination matches: Supermarket, 2:30pm
-Destination matches: Residential_01, 9:35pm
-Destination matches: School, 7:15am
-Destination matches: Bank, 10:45am
-Destination matches: Residential_02, 11:00am
-Destination matches: Cinema, 8:35pm
-Destination matches: Mall, 7:10pm
-Destination matches: PostOffice, 12:35pm
-Destination matches: Residential_04, 7:45pm
-Destination matches: SportCenter, 3:30pm
-Destination matches: Residential_03, 4:05pm
-Destination matches: TownCouncil, 10:10am
+=== FINAL TRANSIT SCHEDULE ===
+Shuttle S02 (Residential_01 @ 9:35pm) - Passenger P02 (Residential_01 @ 9:35pm)
+Shuttle S11 (School @ 7:15am) - Passenger P03 (School @ 7:15am)
+Shuttle S23 (Bank @ 10:45am) - Passenger P04 (Bank @ 10:45am)
+Shuttle S22 (Mall @ 7:10pm) - Passenger P07 (Mall @ 7:10pm)
+Shuttle S24 (PostOffice @ 12:35pm) - Passenger P08 (PostOffice @ 12:35pm)
+Shuttle S04 (Residential_03 @ 4:05pm) - Passenger P11 (Residential_03 @ 4:05pm)
+Shuttle S21 (TownCouncil @ 10:10am) - Passenger P12 (TownCouncil @ 10:10am)
