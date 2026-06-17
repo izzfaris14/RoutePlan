@@ -53,7 +53,7 @@ int main() {
             cin >> type;
             cout << "Enter ID: "; cin >> id;
             cout << "Enter Destination: "; cin >> dest;
-            cout << "Enter Time (e.g., 8:00am): "; cin >> time;
+            cout << "Enter Time: "; cin >> time;
 
             if (type == 1) planner.addShuttle(id, dest, time);
             else if (type == 2) planner.addPassenger(id, dest, time);
