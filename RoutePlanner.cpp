@@ -33,6 +33,7 @@ void RoutePlanner::editShuttle(string id, string newDest, string newTime) {
 
     Shuttle* updated = new Shuttle(id, newDest, newTime);
     sManager.editShuttle(id, updated);
+	generateMatches(); // Recalculate matches after editing shuttle details
 }
 
 void RoutePlanner::editPassenger(string id, string newDest, string newTime) {
@@ -40,6 +41,7 @@ void RoutePlanner::editPassenger(string id, string newDest, string newTime) {
 
     Passenger* updated = new Passenger(id, newDest, newTime);
     pManager.editPassenger(id, updated);
+	generateMatches(); // Recalculate matches after editing passenger details
 }
 
 void RoutePlanner::addShuttle(string id, string dest, string timeStr) {
