@@ -10,6 +10,7 @@ void RoutePlanner::initializeSystem(FileParser& parser) {
 }
 
 void RoutePlanner::generateMatches() {
+	matchedRoutes.clear(); // Clear previous matches before generating new ones
     cout << "Generating matches between shuttles and passengers..." << endl;
 
     const vector<Passenger*>& passengers = pManager.getPassengers();
@@ -40,6 +41,39 @@ void RoutePlanner::editPassenger(string id, string newDest, string newTime) {
     Passenger* updated = new Passenger(id, newDest, newTime);
     pManager.editPassenger(id, updated);
 }
+
+void RoutePlanner::addShuttle(string id, string dest, string timeStr) {
+	sManager.addShuttle(new Shuttle(id, dest, timeStr)); //dynamically allocate
+    generateMatches();//recalculate schedule
+	cout << "\nAdded shuttle: ID=" << id << ", Destination=" << dest << ", Time=" << timeStr << endl;
+}
+
+void RoutePlanner::addPassenger(string id, string dest, string timeStr) {
+	pManager.addPassenger(new Passenger(id, dest, timeStr)); //dynamically allocate
+	generateMatches();//recalculate schedule
+	cout << "\nAdded passenger: ID=" << id << ", Destination=" << dest << ", Time=" << timeStr << endl;
+}
+
+void RoutePlanner::deleteShuttle(string id) {
+	if (sManager.deleteShuttle(id)) {
+		generateMatches(); //recalculate schedule
+		cout << "\nDeleted shuttle with ID: " << id << endl;
+	}
+	else {
+		cout << "\nShuttle with ID " << id << " not found. No deletion performed." << endl;
+	}
+}
+
+void RoutePlanner::deletePassenger(string id) {
+	if (pManager.deletePassenger(id)) {
+		generateMatches(); //recalculate schedule
+		cout << "\nDeleted passenger with ID: " << id << endl;
+	}
+	else {
+		cout << "\nPassenger with ID " << id << " not found. No deletion performed." << endl;
+	}
+}
+
 
 void RoutePlanner::writeFile(string fileName) {
     ofstream outFile(fileName);
