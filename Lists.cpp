@@ -44,7 +44,6 @@ bool ShuttleList::deleteShuttle(string id) {
 	return false; // Shuttle not found
 }
 
-
 // -- PASSENGER LIST --
 PassList::PassList(vector<Passenger*> loadedData) {
     passDB = loadedData;

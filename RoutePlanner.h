@@ -24,4 +24,9 @@ public:
 
     void editShuttle(string id, string newDest, string newTime);
     void editPassenger(string id, string newDest, string newTime);
+
+	void addShuttle(string id, string dest, string timeStr);
+	void addPassenger(string id, string dest, string timeStr);
+	void deleteShuttle(string id);
+	void deletePassenger(string id);
 };
