@@ -29,6 +29,22 @@ void ShuttleList::editShuttle(string id, Shuttle* updated) {
     }
 }
 
+void ShuttleList::addShuttle(Shuttle* newShuttle) {
+	shuttleDB.push_back(newShuttle);
+}
+
+bool ShuttleList::deleteShuttle(string id) {
+	for (int i = 0; i < shuttleDB.size(); i++) {
+		if (shuttleDB[i]->getId() == id) {
+			delete shuttleDB[i]; // Prevent memory leak
+			shuttleDB.erase(shuttleDB.begin() + i);
+			return true;
+		}
+	}
+	return false; // Shuttle not found
+}
+
+
 // -- PASSENGER LIST --
 PassList::PassList(vector<Passenger*> loadedData) {
     passDB = loadedData;
@@ -50,4 +66,19 @@ void PassList::editPassenger(string id, Passenger* updated) {
             break;
         }
     }
+}
+
+void PassList::addPassenger(Passenger* newPassenger) {
+	passDB.push_back(newPassenger);
+}
+
+bool PassList::deletePassenger(string id) {
+	for (int i = 0; i < passDB.size(); i++) {
+		if (passDB[i]->getId() == id) {
+			delete passDB[i]; // Prevent memory leak
+			passDB.erase(passDB.begin() + i);
+			return true;
+		}
+	}
+	return false; // Passenger not found
 }
