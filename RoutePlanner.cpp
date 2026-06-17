@@ -18,7 +18,7 @@ void RoutePlanner::generateMatches() {
     for (const auto& p : passengers) {
         for (const auto& s : shuttles) {
            
-            if (p->getDest() == s->getDest()) {
+            if (p->getDest() == s->getDest() && p->getTimeStr() == s->getTimeStr()) {
                 matchedRoutes.push_back(Route(s, p));
                 break; 
             }
