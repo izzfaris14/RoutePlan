@@ -15,4 +15,6 @@ public:
     const vector<Shuttle*>& getShuttles() const;
     Shuttle* getShuttle(int index) const;
     void editShuttle(string id, Shuttle* updatedShuttle);
+	void addShuttle(Shuttle* newShuttle);
+	bool deleteShuttle(string id);
 };
