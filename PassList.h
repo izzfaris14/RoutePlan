@@ -14,5 +14,7 @@ public:
     //void loadFromFile(string fileName);
     const vector<Passenger*>& getPassengers() const;
     Passenger* getPassenger(int index) const;
-    void editPassenger(string id, Passenger* updatedPassenger);
+	void editPassenger(string id, Passenger* updatedPassenger); //editing operation
+	void addPassenger(Passenger* newPassenger); //adding operation
+	bool deletePassenger(string id); //deleting operation
 };

@@ -14,7 +14,7 @@ public:
     //void loadFromFile(string fileName);
     const vector<Shuttle*>& getShuttles() const;
     Shuttle* getShuttle(int index) const;
-    void editShuttle(string id, Shuttle* updatedShuttle);
-	void addShuttle(Shuttle* newShuttle);
-	bool deleteShuttle(string id);
+	void editShuttle(string id, Shuttle* updatedShuttle); //editing operation
+	void addShuttle(Shuttle* newShuttle); //adding operation
+	bool deleteShuttle(string id); //deleting operation
 };
