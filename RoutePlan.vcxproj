@@ -32,11 +32,9 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="FileParser.h" />
     <ClInclude Include="Passenger.h" />
-    <ClInclude Include="PassList.h" />
     <ClInclude Include="Route.h" />
     <ClInclude Include="RoutePlanner.h" />
     <ClInclude Include="Shuttle.h" />
-    <ClInclude Include="ShuttleList.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>

@@ -50,12 +50,6 @@
     <ClInclude Include="Passenger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ShuttleList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PassList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Route.h">
       <Filter>Header Files</Filter>
     </ClInclude>
