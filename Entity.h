@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-#include <ctime>
 
 using namespace std;
 
@@ -8,14 +7,18 @@ class Entity {
     string id;
     string dest;
     string timeStr;
+    bool isAssigned; // fixes 1-to-1 bug
 public:
     Entity(string id, string dest, string timeStr);
-    virtual ~Entity() = default;
+    virtual ~Entity() {} //virtual destructor for polymorphism
 
 
     string getId() const;
     string getDest() const;
     string getTimeStr() const;
 
-    virtual string getDeets() const = 0; 
+	bool getIsAssigned() const;
+	void setAssigned(bool assigned);
+
+    virtual string getDeets() const = 0; //pure virtual function making this an abstract base class
 };

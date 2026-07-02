@@ -1,5 +1,5 @@
-#include "ScheduleRepository.h"
-#include "ScheduleGenerator.h"
+#include "SchedRepo.h"
+#include "SchedGenerator.h"
 #include "UIController.h"
 #include "FileParser.h"
 

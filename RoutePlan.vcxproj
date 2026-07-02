@@ -21,11 +21,9 @@
   <ItemGroup>
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="FileParser.cpp" />
-    <ClCompile Include="Lists.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Passenger.cpp" />
     <ClCompile Include="Route.cpp" />
-    <ClCompile Include="RoutePlanner.cpp" />
     <ClCompile Include="SchedGenerator.cpp" />
     <ClCompile Include="Shuttle.cpp" />
   </ItemGroup>
@@ -34,7 +32,7 @@
     <ClInclude Include="FileParser.h" />
     <ClInclude Include="Passenger.h" />
     <ClInclude Include="Route.h" />
-    <ClInclude Include="RoutePlanner.h" />
+    <ClInclude Include="SchedGenerator.h" />
     <ClInclude Include="SchedRepo.h" />
     <ClInclude Include="Shuttle.h" />
     <ClInclude Include="UIControl.h" />
