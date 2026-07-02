@@ -26,6 +26,7 @@
     <ClCompile Include="Passenger.cpp" />
     <ClCompile Include="Route.cpp" />
     <ClCompile Include="RoutePlanner.cpp" />
+    <ClCompile Include="SchedGenerator.cpp" />
     <ClCompile Include="Shuttle.cpp" />
   </ItemGroup>
   <ItemGroup>
