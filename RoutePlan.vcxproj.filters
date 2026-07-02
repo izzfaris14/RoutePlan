@@ -68,5 +68,8 @@
     <ClInclude Include="ValidService.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="UIControl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

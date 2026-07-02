@@ -37,6 +37,7 @@
     <ClInclude Include="RoutePlanner.h" />
     <ClInclude Include="SchedRepo.h" />
     <ClInclude Include="Shuttle.h" />
+    <ClInclude Include="UIControl.h" />
     <ClInclude Include="ValidService.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
