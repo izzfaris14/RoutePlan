@@ -34,6 +34,7 @@
     <ClInclude Include="Passenger.h" />
     <ClInclude Include="Route.h" />
     <ClInclude Include="RoutePlanner.h" />
+    <ClInclude Include="SchedRepo.h" />
     <ClInclude Include="Shuttle.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
