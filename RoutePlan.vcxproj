@@ -37,6 +37,7 @@
     <ClInclude Include="RoutePlanner.h" />
     <ClInclude Include="SchedRepo.h" />
     <ClInclude Include="Shuttle.h" />
+    <ClInclude Include="ValidService.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
