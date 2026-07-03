@@ -1,5 +1,5 @@
 #pragma once
-#include "ScheduleRepo.h"
+#include "SchedRepo.h"
 class SchedGenerator {
 public:
 	void generateMatches(ScheduleRepo& repo);
