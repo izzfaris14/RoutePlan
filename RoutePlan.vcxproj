@@ -27,6 +27,7 @@
     <ClCompile Include="SchedGenerator.cpp" />
     <ClCompile Include="SchedRepo.cpp" />
     <ClCompile Include="Shuttle.cpp" />
+    <ClCompile Include="UIControl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h" />

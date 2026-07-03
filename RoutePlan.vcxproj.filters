@@ -39,6 +39,9 @@
     <ClCompile Include="SchedRepo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="UIControl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
