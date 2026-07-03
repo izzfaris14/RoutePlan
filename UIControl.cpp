@@ -16,6 +16,8 @@ UIControl* UIControl::getInstance() {
 void UIControl::displayMatches(const SchedRepo& repo) {
 	cout << "\n=== GENERATED ROUTES ===\n" << endl;
 
+	const auto& routes = repo.getRoutes();
+
 	if (routes.empty()) {
 		cout << "no matches found" << endl;
 	} else{
