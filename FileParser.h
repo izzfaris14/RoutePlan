@@ -3,11 +3,10 @@
 #include <vector>
 #include "Passenger.h"
 #include "Shuttle.h"
-
-using namespace std;
+#include "SchedRepo.h"
 
 class FileParser {
 public:
-    vector<Passenger*> readPassengers(string fileName);
-    vector<Shuttle*> readShuttles(string fileName);
+	static void loadShuttles(const std::string& filename, SchedRepo& repo);
+	static void loadPassengers(const std::string& filename, SchedRepo& repo);
 };

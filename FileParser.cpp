@@ -1,64 +1,55 @@
 #include "FileParser.h"
+#include "Shuttle.h"
+#include "Passenger.h"
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <memory>
 
-using namespace std;
+void FileParser::loadShuttles(const std::string& filename, SchedRepo& repo) {
+	std::ifstream file(filename);
+	if (!file.is_open()) {
+		std::cerr << "Error opening file: " << filename << std::endl;
+		return;
+	}
+	std::string line;
+	while (std::getline(file, line)) {
+		if (line.empty()) continue; // Skip empty lines
 
-vector<Passenger*> FileParser::readPassengers(string fileName) {
-    vector<Passenger*> passengers;
-    ifstream file(fileName);
-    string line;
+		std::stringstream ss(line);
+		std::string id, dest, timeStr, type;
 
-    if (file.is_open()) {
-        while (getline(file, line)) {
-            if (line.empty()) continue; // Skip any accidental blank lines
+		std::getline(ss, id, ',');
+		std::getline(ss, dest, ',');
+		std::getline(ss, timeStr, ',');
+		std::getline(ss, type, ',');
 
-            stringstream ss(line);
-            string id, dest, timeStr;
-
-            // Extract data separated by commas
-            getline(ss, id, ',');
-            getline(ss, dest, ',');
-            getline(ss, timeStr, ',');
-
-            // Create a new pointer and add it to the list
-            passengers.push_back(new Passenger(id, dest, timeStr));
-        }
-        file.close();
-    }
-    else {
-        cout << "Error: Could not open passenger file: " << fileName << endl;
-    }
-
-    return passengers;
+		repo.addShuttle(std::make_unique<Shuttle>(id, dest, timeStr);
+	}
+	file.close();
 }
 
-vector<Shuttle*> FileParser::readShuttles(string fileName) {
-    vector<Shuttle*> shuttles;
-    ifstream file(fileName);
-    string line;
+void FileParser::loadPassengers(const std::string& filename, SchedRepo& repo) {
+	std::ifstream file(filename);
+	if (!file.is_open()) {
+		std::cerr << "Error opening file: " << filename << std::endl;
+		return;
+	}
 
-    if (file.is_open()) {
-        while (getline(file, line)) {
-            if (line.empty()) continue;
+	std::string line;
+	while (std::getline(file, line)) {
+		if (line.empty()) continue; // Skip empty lines
 
-            stringstream ss(line);
-            string id, dest, timeStr;
+		std::stringstream ss(line);
+		std::string id, name, dest, timeStr;
 
-            // Extract data separated by commas
-            getline(ss, id, ',');
-            getline(ss, dest, ',');
-            getline(ss, timeStr, ',');
+		std::getline(ss, id, ',');
+		std::getline(ss, name, ',');
+		std::getline(ss, dest, ',');
+		std::getline(ss, timeStr, ',');
 
-            // Create a new pointer and add it to the list
-            shuttles.push_back(new Shuttle(id, dest, timeStr));
-        }
-        file.close();
-    }
-    else {
-        cout << "Error: Could not open shuttle file: " << fileName << endl;
-    }
-
-    return shuttles;
+		repo.addPassenger(std::make_unique<Passenger>(id, name, dest, timeStr));
+	}
+	file.close();
 }
+
