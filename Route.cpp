@@ -4,33 +4,27 @@
 Route::Route(Shuttle* s, Passenger* p) : sManage(s), pManage(p) {}
 
 string Route::checkDest() const {
-    // Check if the passenger pointer is null just to be safe
-    if (assignedPassenger == nullptr) {
-        return "No passengers assigned.";
-    }
-
-    if (assignedShuttle->getDest() == assignedPassenger->getDest()) {
-        return "Destination matches: " + assignedShuttle->getDest();
-    }
-    else {
-        return "Destination mismatched";
-    }
-} 
+	if (sManage->getDest() == pManage->getDest()) {
+		return"Match";
+	}
+	return "mismatch";
+}
 
 string Route::checkTime() const {
-    return assignedShuttle->getTimeStr(); 
+	if (sManage->getTimeStr() == pManage->getTimeStr()) {
+		return "Match";
+	}
+	return "mismatch";
 }
 
 string Route::getRouteString() const {
-    if (assignedShuttle == nullptr || assignedPassenger == nullptr) return "Invalid Route";
-    return "Shuttle " + assignedShuttle->getId() + " (" + assignedShuttle->getDest() + " @ " + assignedShuttle->getTimeStr() +
-        ") - Passenger " + assignedPassenger->getId() + " (" + assignedPassenger->getDest() + " @ " + assignedPassenger->getTimeStr() + ")";
+	return "Shuttle: " + sManage->getId() + "\nPassenger: " + pManage->getId();
 }
 
 Shuttle* Route::getShuttle() const {
-    return assignedShuttle;
+	return sManage;
 }
 
 Passenger* Route::getPassenger() const {
-    return assignedPassenger;
+	return pManage;
 }
