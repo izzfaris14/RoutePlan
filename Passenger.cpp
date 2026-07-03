@@ -1,11 +1,11 @@
 #include<iostream>
 #include "Passenger.h"
 
-using namespace std;
 
-Passenger::Passenger(string id, string dest, string timeStr) : Entity(id, dest, timeStr) {
+Passenger::Passenger(std::string id, std::string dest, std::string timeStr, int groupSize) 
+	: Entity(id, dest, timeStr), groupSize(groupSize) {
 }
 
-string Passenger::getDeets() const {
-	return "Passenger ID: " + getId() + ", Dest " + getDest() + ", Time:" + getTimeStr();
+std::string Passenger::getDeets() const {
+	return "Passenger ID: " + id + ", Dest " + dest + ", Time:" + timeStr+", Size: " + std::to_string(groupSize);
 }
