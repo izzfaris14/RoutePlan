@@ -41,7 +41,7 @@ void FileParser::loadPassengers(const std::string& filename, SchedRepo& repo) {
 		if (line.empty()) continue; // Skip empty lines
 
 		std::stringstream ss(line);
-		std::string id, name, dest, timeStr;
+		std::string id, name, dest, timeStr, partySize;
 
 		std::getline(ss, id, ',');
 		std::getline(ss, name, ',');

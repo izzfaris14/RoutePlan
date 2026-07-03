@@ -7,5 +7,8 @@ Passenger::Passenger(std::string id, std::string dest, std::string timeStr, int 
 }
 
 std::string Passenger::getDeets() const {
-	return "Passenger ID: " + id + ", Dest " + dest + ", Time:" + timeStr+", Size: " + std::to_string(groupSize);
+	return "Passenger ID: " + getId() + 
+		", Dest " + getDest() + 
+		", Time:" + getTimeStr()+
+		", Size: " + std::to_string(groupSize);
 }
