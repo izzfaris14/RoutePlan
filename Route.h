@@ -1,10 +1,8 @@
 #pragma once
 #include <string>
-#include <vector>
 #include "Shuttle.h"
 #include "Passenger.h"
 
-using namespace std;
 
 class Route {
     Shuttle* sManage;
@@ -12,10 +10,10 @@ class Route {
 
 public:
     Route(Shuttle* s, Passenger* p);
-
-    string checkDest() const;
-	string checkTime() const;
-	string getRouteString() const;
+	
+	std::string checkDest() const;
+	std::string checkTime() const;
+	std::string getRouteString() const;
 
 	Shuttle* getShuttle() const;
 	Passenger* getPassenger() const;

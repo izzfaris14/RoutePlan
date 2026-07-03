@@ -3,21 +3,21 @@
 
 Route::Route(Shuttle* s, Passenger* p) : sManage(s), pManage(p) {}
 
-string Route::checkDest() const {
+std::string Route::checkDest() const {
 	if (sManage->getDest() == pManage->getDest()) {
 		return"Match";
 	}
 	return "mismatch";
 }
 
-string Route::checkTime() const {
+std::string Route::checkTime() const {
 	if (sManage->getTimeStr() == pManage->getTimeStr()) {
 		return "Match";
 	}
 	return "mismatch";
 }
 
-string Route::getRouteString() const {
+std::string Route::getRouteString() const {
 	return "Shuttle: " + sManage->getId() + "\nPassenger: " + pManage->getId();
 }
 

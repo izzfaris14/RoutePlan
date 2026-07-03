@@ -1,9 +1,8 @@
 #include "UIControl.h"
 #include<iostream>
 
-using namespace std;
 
-//initialize the static instance pointer to nullptr
+//initialize the static instance pointer to null
 UIControl* UIControl::instance = nullptr; 
 
 UIControl* UIControl::getInstance() {

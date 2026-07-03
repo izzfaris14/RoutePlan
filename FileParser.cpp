@@ -24,7 +24,7 @@ void FileParser::loadShuttles(const std::string& filename, SchedRepo& repo) {
 		std::getline(ss, timeStr, ',');
 		std::getline(ss, type, ',');
 
-		repo.addShuttle(std::make_unique<Shuttle>(id, dest, timeStr);
+		repo.addShuttle(std::make_unique<Shuttle>(id, dest, timeStr));
 	}
 	file.close();
 }
