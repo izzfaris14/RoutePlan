@@ -1,20 +1,23 @@
-#include "ScheduleGenerator.h"
+#include "SchedGenerator.h"
 
-void ScheduleGenerator::generateMatches(ScheduleRepository& repo) {
+void SchedGenerator::generateMatches(SchedRepo& repo) {
 	const auto& passengers = repo.getPassengers();
 	const auto& shuttles = repo.getShuttles();
 
-	for (const auto& p : passengers) {
-		if (p->getIsAssigned()) continue;
+	for (const& p : passengers) {
+		if (p->getIsAssinged()) continue; //skip if passenger already matched
 
-		if (p->getDest()) == s->getDest() && p->getTimeStr() == s->getTimeStr()){
+		for (const auto& s : shuttles) {
+			if (s->getIsAssinged()) continue; //skip if shuttle already matched
 
-			repo.addRoute(Route(s.get(), p.get()));
+			if (p->getDest == s->getDest() && p->getTimeStr() == s->getTimeStr()) {
 
-			p->setAssigned(true);
-			s->setAssigned(true);
-			break;  // Move to the next passenger after a match is found
+				repo.addRoute(Route(s.get(), p.get());
+
+				p->setIsAssigned(true);
+				s->setIsAssigned(true);
+				break;
+			}
 		}
 	}
-}
 }
