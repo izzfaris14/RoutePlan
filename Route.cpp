@@ -1,10 +1,7 @@
 #include "Route.h"
 
 
-Route::Route(Shuttle* s, Passenger* p) {
-    this->assignedShuttle = s;
-    this->assignedPassenger = p;
-}
+Route::Route(Shuttle* s, Passenger* p) : sManage(s), pManage(p) {}
 
 string Route::checkDest() const {
     // Check if the passenger pointer is null just to be safe

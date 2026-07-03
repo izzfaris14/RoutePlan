@@ -7,8 +7,8 @@
 using namespace std;
 
 class Route {
-    Shuttle* assignedShuttle;
-    Passenger* assignedPassenger;
+    Shuttle* sManage;
+    Passenger* pManage;
 
 public:
     Route(Shuttle* s, Passenger* p);
