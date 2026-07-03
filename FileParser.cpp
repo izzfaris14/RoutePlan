@@ -52,7 +52,7 @@ void FileParser::loadPassengers(const std::string& filename, SchedRepo& repo) {
 
 		int size = partySize.empty() ? 1 : std::stoi(partySize); 
 
-		repo.addPassenger(std::make_unique<Passenger>(id, name, dest, timeStr));
+		repo.addPassenger(std::make_unique<Passenger>(id, name, dest, timeStr,size));
 	}
 	file.close();
 }
