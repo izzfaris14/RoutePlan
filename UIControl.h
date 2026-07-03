@@ -1,18 +1,13 @@
 #pragma once
-#include "ScheduleRepo.h"
+#include "SchedRepo.h"
 #include <iostream>
 
 class UIControl {
 	static UIControl* instance;
-
-	UIControl() = {}
+	UIControl() {}
 
 public:
-	static UIControl * getInstance();
+	static UIControl* getInstance();
 
-	void displayMainMenu();
-	void displayMatches(const ScheduleRepo& repo);
-	void displayUnmatched(const ScheduleRepo& repo);
-	void promptForNewPassenger(ScheduleRepo& repo);
+	void displayMatches(const SchedRepo& repo);
 };
-

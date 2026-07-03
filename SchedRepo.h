@@ -5,7 +5,7 @@
 #include "Passenger.h"
 #include "Route.h"
 
-class ScheduleRepo
+class SchedRepo
 {
 	std::vector<std::unique_ptr<Shuttle>> shuttles;
 	std::vector<std::unique_ptr<Passenger>> passengers;
