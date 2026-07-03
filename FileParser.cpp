@@ -48,6 +48,10 @@ void FileParser::loadPassengers(const std::string& filename, SchedRepo& repo) {
 		std::getline(ss, dest, ',');
 		std::getline(ss, timeStr, ',');
 
+		// Default to 1 if partySize is empty
+
+		int size = partySize.empty() ? 1 : std::stoi(partySize); 
+
 		repo.addPassenger(std::make_unique<Passenger>(id, name, dest, timeStr));
 	}
 	file.close();
