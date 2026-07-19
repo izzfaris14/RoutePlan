@@ -3,7 +3,7 @@
 #include <string>
 
 class SchedGenerator {
-	int partseTimeStr(const std::string& timeStr) const;
+	int parseTimeStr(const std::string& timeStr) const;
 public:
 	void generateMatches(SchedRepo& repo);
 };
