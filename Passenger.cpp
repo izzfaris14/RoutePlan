@@ -12,3 +12,7 @@ std::string Passenger::getDeets() const {
 		", Time:" + getTimeStr()+
 		", Size: " + std::to_string(groupSize);
 }
+
+int Passenger::getGroupSize() const {
+	return groupSize;
+}

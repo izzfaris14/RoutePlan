@@ -24,8 +24,21 @@ void FileParser::loadShuttles(const std::string& filename, SchedRepo& repo) {
 		std::getline(ss, timeStr, ',');
 		std::getline(ss, CapacityStr, ',');
 
-		int capacity = CapacityStr.empty() ? 0 : std::stoi(CapacityStr);
-		repo.addShuttle(std::make_unique<Shuttle>(id, dest, timeStr,capacity));
+		if (!CapacityStr.empty() && CapacityStr.back() == '\r') {
+			CapacityStr.pop_back();
+	}
+		int capacity = 0;
+		if (CapacityStr == "Small") capacity = 4;
+		else if (CapacityStr == "Family") capacity = 7;
+		else if (CapacityStr == "Premium") capacity = 15;
+		else if (!CapacityStr.empty()) {
+			try { capacity = std::stoi(CapacityStr); }
+			catch (...) { capacity = 4; }
+		}
+		else {
+			capacity = 4;
+		}
+		repo.addShuttle(std::make_unique<Shuttle>)(id, dest, timeStr, capacity));
 	}
 	file.close();
 }

@@ -1,5 +1,16 @@
 #include "UIControl.h"
+#include "Route.h"
+#include "SchedRepo.h"
+#include <iostream>
 
+UIControl* UIControl::instance = nullptr;
+
+UIControl* UIControl::getInstance() {
+	if (instance = nullptr) {
+		instance = new UIControl();
+	}
+	return instance;
+}
 void UIControl::displayMatches(const SchedRepo& repo) {
 	std::cout << "\n=== GENERATED ROUTES ===\n" << std::endl;
 
