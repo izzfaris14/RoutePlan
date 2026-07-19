@@ -1,14 +1,13 @@
 #pragma once
 #include<string>
-#include<ctime>
 #include "Entity.h"
 
 
 
 class Shuttle : public Entity {
-	int capacity;
+	int cap;
 public:
-	Shuttle(std::string id, std::string dest, std::string timeStr, int capacity);
-	std::string getDeets() const override;
+	Shuttle(std::string id, std::string dest, std::string timeStr, int cap);
 	int getCapacity() const;
+	std::string getDeets() const override;
 };

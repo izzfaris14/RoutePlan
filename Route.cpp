@@ -19,7 +19,7 @@ int Route::getCurrentOccupancy() const {
 }
 
 std::string Route::getRouteString() const {
-	std::string res = "Shittle: " + sManage->getId() + " | Occupancy: " +
+	std::string res = "Shuttle: " + sManage->getId() + " | Occupancy: " +
 		std::to_string(getCurrentOccupancy()) + "/" + std::to_string(sManage->getCapacity()) + "\nPassengers: ";
 	if (pManage.empty()) { res += "None"; }
 	for (const auto& p : pManage) {
