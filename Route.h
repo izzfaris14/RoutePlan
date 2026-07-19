@@ -20,7 +20,7 @@ public:
 	//std::string getRouteString() const;
 
 	Shuttle* getShuttle() const;
-	const std::vector<Passenger*> getPassengers() const;
+	const std::vector<Passenger*>& getPassengers() const;
 	int getCurrentOccupancy() const;
 
 };

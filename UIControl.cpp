@@ -1,3 +1,5 @@
+#include "UIControl.h"
+
 void UIControl::displayMatches(const SchedRepo& repo) {
 	std::cout << "\n=== GENERATED ROUTES ===\n" << std::endl;
 
