@@ -6,7 +6,9 @@
 
 
 class Shuttle : public Entity {
+	int capacity;
 public:
-	Shuttle(string id, string dest, string timeStr);
-	string getDeets() const;
+	Shuttle(std::string id, std::string dest, std::string timeStr, int capacity);
+	std::string getDeets() const override;
+	int getCapacity() const;
 };
