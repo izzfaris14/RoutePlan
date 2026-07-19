@@ -5,6 +5,7 @@
 #include <iostream>
 #include <sstream>
 #include <memory>
+#include<string>
 
 void FileParser::loadShuttles(const std::string& filename, SchedRepo& repo) {
 	std::ifstream file(filename);

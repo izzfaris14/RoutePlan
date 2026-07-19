@@ -33,6 +33,7 @@ void SchedGenerator::generateMatches(SchedRepo& repo) {
 		if (p->getIsAssigned()) continue;
 
 		int pTime = parseTimeStr(p->getTimeStr());
+
 		for (auto& route : activeRoutes) {
 			Shuttle* s = route.getShuttle();
 
@@ -40,21 +41,21 @@ void SchedGenerator::generateMatches(SchedRepo& repo) {
 				int sTime = parseTimeStr(s->getTimeStr());
 
 
-				if (sTime>=(pTime-10) && sTime <= pTime){
+				if (sTime >= (pTime - 10) && sTime <= pTime) {
 					if (route.getCurrentOccupancy() + p->getGroupSize() <= s->getCapacity()) {
 						route.addPassenger(p.get());
 						p->setAssigned(true);
 						break;
-				}
+					}
 				}
 			}
-
 		}
 	}
-}
-for (const auto& route : activeRoutes) {
-	if (!route.getPassengers().empty()) {
-		route.getShuttle()->setAssigned(true);
-		repo.addRoute(route);
+
+	for (const auto& route : activeRoutes) {
+		if (!route.getPassengers().empty()) {
+			route.getShuttle()->setAssigned(true);
+			repo.addRoute(route);
+		}
 	}
 }
