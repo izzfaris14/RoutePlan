@@ -11,6 +11,9 @@ class Route {
 
 public:
 	Route(Shuttle* s); //only needs shuttle to start
+
+	void addPassenger(Passenger* p);
+	std::string getRouteString() const;
 	
 	//std::string checkDest() const;
 	//std::string checkTime() const;
