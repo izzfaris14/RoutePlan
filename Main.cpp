@@ -22,4 +22,4 @@ int main() {
 	ui->displayMatches(repo);
 
 	return 0;
-}
+};

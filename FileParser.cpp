@@ -20,10 +20,10 @@ void FileParser::loadShuttles(const std::string& filename, SchedRepo& repo) {
 		std::stringstream ss(line);
 		std::string id, dest, timeStr, capStr;
 
-		std::getline(ss, id, ",");
-		std::getline(ss, dest, ",");
-		std::getline(ss, timeStr, ",");
-		std::getline(ss, capStr, ",");
+		std::getline(ss, id, ',');
+		std::getline(ss, dest, ',');
+		std::getline(ss, timeStr, ',');
+		std::getline(ss, capStr, ',');
 
 		if (!capStr.empty() && capStr.back() == '\r') {
 			capStr.pop_back();
@@ -61,10 +61,10 @@ void FileParser::loadPassengers(const std::string& filename, SchedRepo& repo) {
 		std::stringstream ss(line);
 		std::string id, dest, timeStr, sizeStr;
 
-		std::getline(ss, id, ",");
-		std::getline(ss, dest, ",");
-		std::getline(ss, timeStr, ",");
-		std::getline(ss, sizeStr, ",");
+		std::getline(ss, id, ',');
+		std::getline(ss, dest, ',');
+		std::getline(ss, timeStr, ',');
+		std::getline(ss, sizeStr, ',');
 
 		int partSize = sizeStr.empty() ? 1 : std::stoi(sizeStr);
 		repo.addPassenger(std::make_unique<Passenger>(id, dest, timeStr, sizeStr));
