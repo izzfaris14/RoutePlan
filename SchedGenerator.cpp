@@ -6,11 +6,15 @@
 int SchedGenerator::parseTimeStr(const std::string& timeStr) const {
     if (timeStr.length() < 5) return 0;
 
-    int hours = std::stoi(timeStr.substr(0, 2));
-    int mins = std::stoi(timeStr.substr(3, 2));
-    std::string period = timeStr.substr(timeStr.length() - 2);
+    // Dynamically find the colon to safely split hours and minutes
+    size_t colonPos = timeStr.find(':');
+    if (colonPos == std::string::npos) return 0;
 
-    for (auto& c : period) c = std::tolower(c); // lowercase
+    int hours = std::stoi(timeStr.substr(0, colonPos));
+    int mins = std::stoi(timeStr.substr(colonPos + 1, 2));
+
+    std::string period = timeStr.substr(timeStr.length() - 2);
+    for (auto& c : period) c = std::tolower(c); // Ensure lowercase
 
     if (period == "pm" && hours != 12) hours += 12;
     else if (period == "am" && hours == 12) hours = 0;
