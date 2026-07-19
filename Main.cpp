@@ -14,7 +14,7 @@ int main() {
 
 	cout << "system initializing\n";
 
-	parser.loadShuttles("shuttles.txt", repo);
+	parser.loadShuttles("shuttle.txt", repo);
 	parser.loadPassengers("passenger.txt", repo);
 
 	generator.generateMatches(repo);
