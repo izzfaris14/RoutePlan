@@ -10,7 +10,7 @@ int main() {
 	SchedRepo repo;
 	SchedGenerator generator;
 	FileParser parser;
-	UIControl* ui UIControl::getInstance();
+	UIControl* ui = UIControl::getInstance();
 
 	cout << "system initializing\n";
 
