@@ -1,11 +1,11 @@
 #include "Route.h"
 
-
-Route::Route(Shuttle* s): sManage(s) {}
+Route::Route(Shuttle* s) :sManage(s) {}
 
 void Route::addPassenger(Passenger* p) {
 	pManage.push_back(p);
 }
+
 Shuttle* Route::getShuttle() const { return sManage; }
 
 const std::vector<Passenger*>& Route::getPassengers() const { return pManage; }
@@ -18,12 +18,14 @@ int Route::getCurrentOccupancy() const {
 	return total;
 }
 
-std::string Route::getRouteString() const {
+std::string Route::getRouteString() {
 	std::string res = "Shuttle: " + sManage->getId() + " | Occupancy: " +
-		std::to_string(getCurrentOccupancy()) + "/" + std::to_string(sManage->getCapacity()) + "\nPassengers: ";
-	if (pManage.empty()) { res += "None"; }
+		std::to_string(getCurrentOccupancy()) + "/" + std::to_string(sManage->getCapacity()) + "\nPassenger:";
+	if (pManage.empty()) {
+		res += "None";
+	}
 	for (const auto& p : pManage) {
-		res += p->getId();
+		res += p->getId() + " ";
 	}
 	return res;
 }
