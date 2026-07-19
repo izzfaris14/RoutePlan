@@ -14,32 +14,32 @@ void FileParser::loadShuttles(const std::string& filename, SchedRepo& repo) {
 	}
 	std::string line;
 	while (std::getline(file, line)) {
-		if (line.empty()) continue;
+		if (line.empty())continue;
 
 		std::stringstream ss(line);
-		std::string id, dest, timeStr, capacityStr;
+		std::string id, dest, timeStr, capStr;
 
-		std::getline(ss, id, ',');
-		std::getline(ss, dest, ',');
-		std::getline(ss, timeStr, ',');
-		std::getline(ss, capacityStr, ',');
+		std::getline(ss, id, ",");
+		std::getline(ss, dest, ",");
+		std::getline(ss, timeStr, ",");
+		std::getline(ss, capStr, ",");
 
-		// Remove invisible carriage returns (\r) from Windows text files
-		if (!capacityStr.empty() && capacityStr.back() == '\r') {
-			capacityStr.pop_back();
+		if (!capStr.empty() && capStr.back() == '\r') {
+			capStr.pop_back();
 		}
 
-		// Part 2 Spec: Map "Small", "Family", "Premium" to actual integer capacities
 		int capacity = 0;
-		if (capacityStr == "Small") capacity = 4;
-		else if (capacityStr == "Family") capacity = 7;
-		else if (capacityStr == "Premium") capacity = 15;
-		else if (!capacityStr.empty()) {
-			try { capacity = std::stoi(capacityStr); }
-			catch (...) { capacity = 4; } // Default fallback
+		if (capStr == "Small") capacity = 4;
+		else if (capStr == "Family") capacity = 7;
+		else if (capStr == "Premium") capacity = 15;
+		else if (!capStr.empty()) {
+			try {
+				capacity = std::stoi(capStr);
+			}
+			catch (...) { capacity = 4; }
 		}
 		else {
-			capacity = 4; // Default if column is completely missing
+			capacity = 4;
 		}
 
 		repo.addShuttle(std::make_unique<Shuttle>(id, dest, timeStr, capacity));
@@ -55,18 +55,23 @@ void FileParser::loadPassengers(const std::string& filename, SchedRepo& repo) {
 	}
 	std::string line;
 	while (std::getline(file, line)) {
-		if (line.empty()) continue;
+		if (line.empty())continue;
 
 		std::stringstream ss(line);
 		std::string id, dest, timeStr, sizeStr;
 
-		std::getline(ss, id, ',');
-		std::getline(ss, dest, ',');
-		std::getline(ss, timeStr, ',');
-		std::getline(ss, sizeStr, ',');
+		std::getline(ss, id, ",");
+		std::getline(ss, dest, ",");
+		std::getline(ss, timeStr, ",");
+		std::getline(ss, sizeStr, ",");
 
-		int partySize = sizeStr.empty() ? 1 : std::stoi(sizeStr);
-		repo.addPassenger(std::make_unique<Passenger>(id, dest, timeStr, partySize));
+		int partSize = sizeStr.empty() ? 1 : std::stoi(sizeStr);
+		repo.addPassenger(std::make_unique<Passenger>(id, dest, timeStr, sizeStr));
 	}
 	file.close();
 }
+
+
+
+
+
