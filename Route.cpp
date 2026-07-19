@@ -1,30 +1,29 @@
 #include "Route.h"
 
 
-Route::Route(Shuttle* s, Passenger* p) : sManage(s), pManage(p) {}
+Route::Route(Shuttle* s): sManage(s) {}
 
-std::string Route::checkDest() const {
-	if (sManage->getDest() == pManage->getDest()) {
-		return"Match";
-	}
-	return "mismatch";
+void Route::addPassenger(Passenger* p) {
+	pManage.push_back(p);
 }
+Shuttle* Route::getShuttle() const { return sManange; }
 
-std::string Route::checkTime() const {
-	if (sManage->getTimeStr() == pManage->getTimeStr()) {
-		return "Match";
+const std::vector<Passenger*>& Route::getPassengers() const { return pManage; }
+
+int Route::getCurrentOccupancy() const {
+	int total = 0;
+	for (const auto& p : pManage) {
+		total += p->getGroupSize();
 	}
-	return "mismatch";
+	return total;
 }
 
 std::string Route::getRouteString() const {
-	return "Shuttle: " + sManage->getId() + "\nPassenger: " + pManage->getId();
-}
-
-Shuttle* Route::getShuttle() const {
-	return sManage;
-}
-
-Passenger* Route::getPassenger() const {
-	return pManage;
+	std::string res = "Shittle: " + sManage->getId() + " | Occupancy: " +
+		std::to_string(getCurrentOccupancy()) + "/" std::to_string(sManage->getCapacity()) + "\nPassengers: ";
+	if (pManage.empty()) { res += "None"; }
+	for (const auto& p : pManage) {
+		res += p->getId();
+	}
+	return res;
 }
