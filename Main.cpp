@@ -10,20 +10,19 @@ int main() {
     // 1. Initialize our decoupled architecture
     SchedRepo repo;
     SchedGenerator generator;
+    FileParser parser;
     UIControl* ui = UIControl::getInstance();
 
-    cout << "System initializing. Loading data from text files..." << endl;
+    cout << "System initializing...\n";
 
-    // 2. Load the Data!
-    FileParser::loadShuttles("shuttle.txt", repo);
-    FileParser::loadPassengers("passenger.txt", repo);
+    // 2. Load the data using FileParser
+    parser.loadShuttles("shuttle.txt", repo);
+    parser.loadPassengers("passenger.txt", repo);
 
-    cout << "Data loaded successfully. Running scheduling algorithm..." << endl;
-
-    // 3. Generate matches
+    // 3. Generate the matches! (This is what you were missing)
     generator.generateMatches(repo);
 
-    // 4. Pass the database to the UI to display
+    // 4. Display the results
     ui->displayMatches(repo);
 
     return 0;
