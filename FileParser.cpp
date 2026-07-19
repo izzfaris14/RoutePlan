@@ -17,14 +17,15 @@ void FileParser::loadShuttles(const std::string& filename, SchedRepo& repo) {
 		if (line.empty()) continue; // Skip empty lines
 
 		std::stringstream ss(line);
-		std::string id, dest, timeStr, type;
+		std::string id, dest, timeStr, CapacityStr;
 
 		std::getline(ss, id, ',');
 		std::getline(ss, dest, ',');
 		std::getline(ss, timeStr, ',');
-		std::getline(ss, type, ',');
+		std::getline(ss, CapacityStr, ',');
 
-		repo.addShuttle(std::make_unique<Shuttle>(id, dest, timeStr));
+		int capacity = CapacityStr.empty() ? 0 : std::stoi(CapacityStr);
+		repo.addShuttle(std::make_unique<Shuttle>(id, dest, timeStr,CapacityStr));
 	}
 	file.close();
 }
