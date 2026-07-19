@@ -25,7 +25,7 @@ void FileParser::loadShuttles(const std::string& filename, SchedRepo& repo) {
 		std::getline(ss, CapacityStr, ',');
 
 		int capacity = CapacityStr.empty() ? 0 : std::stoi(CapacityStr);
-		repo.addShuttle(std::make_unique<Shuttle>(id, dest, timeStr,CapacityStr));
+		repo.addShuttle(std::make_unique<Shuttle>(id, dest, timeStr,capacity));
 	}
 	file.close();
 }
