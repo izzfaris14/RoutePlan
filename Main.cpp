@@ -56,11 +56,11 @@ int main() {
 			string id, dest, timeStr;
 			int gSize;
 
-			cout << "Enter P.ID:";
+			cout << "Enter P.ID: ";
 			cin >> id;
-			cout << "Enter Dest";
+			cout << "Enter Dest: ";
 			cin >> dest;
-			cout << "Enter time:";
+			cout << "Enter time: ";
 			cin >> timeStr;
 			cout << "Enter group size:";
 			cin >> gSize;

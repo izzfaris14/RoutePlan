@@ -1,9 +1,0 @@
-=== FINAL TRANSIT SCHEDULE ===
-Shuttle S02 (Residential_01 @ 9:35pm) - Passenger P02 (Residential_01 @ 9:35pm)
-Shuttle S11 (School @ 7:15am) - Passenger P03 (School @ 7:15am)
-Shuttle S23 (Bank @ 10:45am) - Passenger P04 (Bank @ 10:45am)
-Shuttle S22 (Mall @ 7:10pm) - Passenger P07 (Mall @ 7:10pm)
-Shuttle S24 (PostOffice @ 12:35pm) - Passenger P08 (PostOffice @ 12:35pm)
-Shuttle S14 (SportCenter @ 3:30pm) - Passenger P10 (SportCenter @ 3:30pm)
-Shuttle S04 (Residential_03 @ 4:05pm) - Passenger P11 (Residential_03 @ 4:05pm)
-Shuttle S21 (TownCouncil @ 10:10am) - Passenger P12 (TownCouncil @ 10:10am)
