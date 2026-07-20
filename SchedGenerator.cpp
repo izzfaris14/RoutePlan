@@ -1,36 +1,46 @@
 #include "SchedGenerator.h"
 #include <iostream>
 
+using namespace std;
+
 void SchedGenerator::generateMatches(SchedRepo& repo) {
-	for (size_t i = 0; i < repo.getShuttleCount(); i++) {
-		Shuttle* s = repo.getShuttle(i);
+    // 1. STATE RESET: Clear the "assigned" flags so we can rebuild from scratch safely
+    for (size_t i = 0; i < repo.getPassengerCount(); i++) {
+        repo.getPassenger(i)->setAssigned(false);
+    }
+    for (size_t i = 0; i < repo.getShuttleCount(); i++) {
+        repo.getShuttle(i)->setAssigned(false);
+    }
 
-		//skip if fully booked
-		if (!s->isAvailable()) continue;
+    // 2. Standard Part 2 Matching Logic
+    for (size_t i = 0; i < repo.getShuttleCount(); i++) {
+        Shuttle* s = repo.getShuttle(i);
 
-		Route newRoute(s);
+        if (!s->isAvailable()) continue;
 
-		for (size_t j = 0; j < repo.getPassengerCount(); j++) {
-			Passenger* p = repo.getPassenger(j);
+        Route newRoute(s);
 
-			if (p->getIsAssigned()) continue;
+        for (size_t j = 0; j < repo.getPassengerCount(); j++) {
+            Passenger* p = repo.getPassenger(j);
 
-			//matching logic
+            if (p->getIsAssigned()) continue;
 
-			if (p->getDest() == s->getDest() && p->getTimeStr() == s->getTimeStr()) {
-				if (s->getCapacity() >= p->getGroupSize()) {
-					newRoute.addPassenger(p);
-					p->setAssigned(true);
-					s->setCapacity(s->getCapacity() - p->getGroupSize());
-				}
-			}
-		}
+            if (p->getDest() == s->getDest() && p->getTimeStr() == s->getTimeStr()) {
 
-		if (newRoute.getPassengerCount() > 0) {
-			repo.addRoute(newRoute);
-			if (s->getCapacity() == 0) {
-				s->setAssigned(true);
-			}
-		}
-	}
+                // NON-DESTRUCTIVE MATH: Current Occupancy + New Group Size <= Max Capacity
+                if (s->getCapacity() >= (newRoute.getCurrentOccupancy() + p->getGroupSize())) {
+                    newRoute.addPassenger(p);
+                    p->setAssigned(true);
+                }
+            }
+        }
+
+        if (newRoute.getPassengerCount() > 0) {
+            repo.addRoute(newRoute);
+            // If the route is 100% full, lock the shuttle so it can't be used again
+            if (s->getCapacity() == newRoute.getCurrentOccupancy()) {
+                s->setAssigned(true);
+            }
+        }
+    }
 }
