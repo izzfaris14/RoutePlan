@@ -12,6 +12,7 @@ public:
 	Route(Shuttle* s);
 
 	void addPassenger(Passenger* p);
+	size_t getPassengerCount() const;
 	std::string getRouteString() const;
 
 	Shuttle* getShuttle() const;

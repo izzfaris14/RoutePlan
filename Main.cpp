@@ -81,8 +81,8 @@ int main() {
 
 			if (outFile.is_open()) {
 				//loop through encapsulated data
-				for (size - t i = 0; i < repo.getRouteCount(); i++) {
-					outFile << repogetRoute(i).getRouteString() << "\n";
+				for (size_t i = 0; i < repo.getRouteCount(); i++) {
+					outFile << repo.getRoute(i).getRouteString() << "\n";
 				}
 				outFile.close();
 				cout << "Schedule successfull saved to final_scehdule.txt\n";

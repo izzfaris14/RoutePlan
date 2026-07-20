@@ -3,6 +3,8 @@
 #include "SchedRepo.h"
 #include <iostream>
 
+using namespace std;
+
 UIControl* UIControl::instance = nullptr;
 
 UIControl* UIControl::getInstance() {
@@ -13,18 +15,16 @@ UIControl* UIControl::getInstance() {
 }
 
 void UIControl::displayMatches(const SchedRepo& repo) {
-	std::cout << "\n===GENERATED ROUTES ===\n" << std::endl;
-
-	const auto& routes = repo.getRoutes();
-
-	if (routes.empty()) {
-		std::cout << "no mathces found" << std::endl;
+	cout << "\n===System Scheduling Matches ===\n" << endl;
+	if (repo.getRouteCount() == 0) {
+		cout << "no matches found.\n";
+		return;
 	}
-	else {
-		for (const auto& r : routes) {
-			std::cout << "----" << std::endl;
-			std::cout << r.getRouteString() << std::endl;
-		}
+
+	for (size_t i = 0; i < repo.getRouteCount(); i++) {
+		const Route& r = repo.getRoute(i);
+		cout << r.getRouteString() << "\n";
 	}
-	std::cout << "====\n" << std::endl;
+	cout << "----------\n";
 }
+	

@@ -1,61 +1,36 @@
 #include "SchedGenerator.h"
-#include "Route.h"
-#include <cctype>
-#include <vector>
-
-int SchedGenerator::parseTimeStr(const std::string& timeStr) const {
-	if (timeStr.length() < 5) return 0;
-
-	size_t colonPos = timeStr.find(":");
-	if (colonPos == std::string::npos)return 0;
-
-	int hours = std::stoi(timeStr.substr(0, colonPos));
-	int mins = std::stoi(timeStr.substr(colonPos + 1, 2));
-
-	std::string period = timeStr.substr(timeStr.length() - 2);
-	for (auto& c : period) c = std::tolower(c);
-
-	if (period == "pm" && hours != 12) hours += 12;
-	else if (period == "am" && hours == 12)hours = 0;
-
-	return (hours * 60) + mins;
-}
+#include <iostream>
 
 void SchedGenerator::generateMatches(SchedRepo& repo) {
-	const auto& passengers = repo.getPassengers();
-	const auto& shuttles = repo.getShuttles();
+	for (size_t i = 0; i < repo.getShuttleCount(); i++) {
+		Shuttle* s = repo.getShuttle(i);
 
-	std::vector<Route> activeRoutes;
-	for (const auto& s : shuttles) {
-		activeRoutes.push_back(Route(s.get()));
-	}
-	for (const auto& p : passengers) {
-		if (p->getIsAssigned()) continue;
+		//skip if fully booked
+		if (!s->isAvailable()) continue;
 
-		int pTime = parseTimeStr(p->getTimeStr());
+		Route newRoute(s);
 
-		for (auto& route : activeRoutes) {
-			Shuttle* s = route.getShuttle();
+		for (size_t j = 0; j < repo.getPassengerCount(); j++) {
+			Passenger* p = repo.getPassenger(j);
 
-			if (p->getDest() == s->getDest()) {
-				int sTime = parseTimeStr(s->getTimeStr());
+			if (p->getIsAssigned()) continue;
 
+			//matching logic
 
-				if (sTime >= (pTime - 10) && sTime <= pTime) {
-					if (route.getCurrentOccupancy() + p->getGroupSize() <= s->getCapacity()) {
-						route.addPassenger(p.get());
-						p->setAssigned(true);
-						break;
-					}
+			if (p->getDest() == s->getDest() && p->getTimeStr() == s->getTimeStr()) {
+				if (s->getCapacity() >= p->getGroupSize()) {
+					newRoute.addPassenger(p);
+					p->setAssigned(true);
+					s->setCapacity(s->getCapacity() - p->getGroupSize());
 				}
 			}
 		}
-	}
 
-	for (const auto& route : activeRoutes) {
-		if (!route.getPassengers().empty()) {
-			route.getShuttle()->setAssigned(true);
-			repo.addRoute(route);
+		if (newRoute.getPassengerCount() > 0) {
+			repo.addRoute(newRoute);
+			if (s->getCapacity() == 0) {
+				s->setAssigned(true);
+			}
 		}
 	}
 }

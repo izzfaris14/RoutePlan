@@ -6,6 +6,14 @@ Shuttle::Shuttle(std::string id, std::string dest, std::string timeStr, int capa
 
 int Shuttle::getCapacity() const { return cap; }
 
+void Shuttle::setCapacity(int c) {
+	cap = c;
+}
+
+bool Shuttle::isAvailable() const {
+	return !getIsAssigned() && cap > 0;
+}
+
 std::string Shuttle::getDeets() const {
 	return "Shuttle ID: " + getId() + ", Dest: " + getDest() +
 		", Time: " + getTimeStr() + ", Capacity: " + std::to_string(cap);
