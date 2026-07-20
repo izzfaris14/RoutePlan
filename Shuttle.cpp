@@ -18,7 +18,3 @@ std::string Shuttle::getDeets() const {
 	return "Shuttle ID: " + getId() + ", Dest: " + getDest() +
 		", Time: " + getTimeStr() + ", Capacity: " + std::to_string(cap);
 }
-
-bool Shuttle::isAvailable() const {
-	return !getIsAssigned();
-}
