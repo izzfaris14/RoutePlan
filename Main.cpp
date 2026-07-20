@@ -62,7 +62,7 @@ int main() {
 			cin >> dest;
 			cout << "Enter time: ";
 			cin >> timeStr;
-			cout << "Enter group size:";
+			cout << "Enter group size: ";
 			cin >> gSize;
 
 			//push to RAM
