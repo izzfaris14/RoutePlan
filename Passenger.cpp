@@ -8,4 +8,9 @@ int Passenger::getGroupSize() const{ return gSize; }
 std::string Passenger::getDeets() const {
 	return "Passenger ID: " + getId() + ", Dest: " + getDest() +
 		", Time: " + getTimeStr() + ", Capacity: " + std::to_string(gSize);
+	
+}
+
+bool Passenger::isAvailable() const {
+	return !getIsAssigned();
 }

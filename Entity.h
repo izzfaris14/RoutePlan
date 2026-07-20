@@ -21,4 +21,5 @@ public:
 	void setAssigned(bool assigned);
 
     virtual string getDeets() const = 0; //pure virtual function making this an abstract base class
+    virtual bool isAvailable() const = 0;
 };
