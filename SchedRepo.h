@@ -16,10 +16,16 @@ public:
 	void addShuttle(std::unique_ptr<Shuttle> s);
 	void addPassenger(std::unique_ptr<Passenger> p);
 	void addRoute(const Route& r);
+	void clearRoutes(); //required before re-generating matches
 
-	//retrieve data safely using const references
-	const std::vector<std::unique_ptr<Shuttle>>& getShuttles() const;
-	const std::vector<std::unique_ptr<Passenger>>& getPassengers() const;
-	const std::vector<Route>& getRoutes() const;
+	//encapsualtion retrieval (no raw vectors returned)
+	size_t getShuttleCount() const;
+	Shuttle* getShuttle(size_t index) const;
+
+	size_t getPassengerCount() const;
+	Passenger* getPassenger(size_t index) const;
+
+	size_t getRouteCount() const;
+	const Route& getRoute(size_t index) const;
 };
 

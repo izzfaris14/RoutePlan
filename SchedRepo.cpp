@@ -13,14 +13,27 @@ void SchedRepo::addRoute(const Route& r) {
 	matchedRoutes.push_back(r);
 }
 
-const std::vector<unique_ptr<Shuttle>>& SchedRepo::getShuttles() const {
-	return shuttles;
+void SchedRepo::clearRoutes() {
+	matchedRoutes.clear();
 }
 
-const std::vector<unique_ptr<Passenger>>& SchedRepo::getPassengers() const {
-	return passengers;
+size_t SchedRepo::getShuttleCount() const { 
+	return shuttles.size(); 
+}
+Shuttle* SchedRepo::getShuttle(size_t index) const { 
+	return shuttles[index].get();
 }
 
-const std::vector<Route>& SchedRepo::getRoutes() const {
-	return matchedRoutes;
+size_t SchedRepo::getPassengerCount() const {
+	return passengers.size();
+}
+Passenger* SchedRepo::getPassenger(size_t index) const {
+	return passengers[index].get();
+}
+
+size_t SchedRepo::getRouteCount() const {
+	return matchedRoutes.size();
+}
+const Route& SchedRepo::getRoute(size_t index) const {
+	return matchedRoutes[index];
 }
