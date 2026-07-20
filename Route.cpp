@@ -6,6 +6,10 @@ void Route::addPassenger(Passenger* p) {
 	pManage.push_back(p);
 }
 
+size_t Route::getPassengerCount() const {
+	return pManage.size();
+}
+
 Shuttle* Route::getShuttle() const { return sManage; }
 
 const std::vector<Passenger*>& Route::getPassengers() const { return pManage; }
