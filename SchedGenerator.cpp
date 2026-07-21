@@ -14,7 +14,7 @@ int SchedGenerator::parseTimeStr(const std::string& timeStr) const {
     std::stringstream ss(timeStr.substr(0, timeStr.length() - 2));
     ss >> hours >> colon >> minutes;
 
-    if (period == "pm" && hours != 12) hours += 12;
+    if (period == "pm" && hours != 12) hours += 12; 
     if (period == "am" && hours == 12) hours = 0;
 
     return (hours * 60) + minutes;
@@ -60,6 +60,11 @@ void SchedGenerator::generateMatches(SchedRepo& repo, int algorithmMode) {
 
             int passTime = parseTimeStr(p->getTimeStr());
             int timeDiff = passTime - shuttleTime;
+
+            // handle midnight timing
+            if (timeDiff < 0) {
+                timeDiff += 1440; // add total minutes in a day
+            }
 
             bool timeValid = (timeDiff >= 0 && timeDiff <= 10);
 
