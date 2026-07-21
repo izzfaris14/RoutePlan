@@ -9,6 +9,14 @@
  * ============================================================================
  */
 
+
+ /*
+  * Function: Passenger (Constructor)
+  * Author: Izz Faris Putra Bin Maskhurin
+  * Description: Initializes the child entity and forwards the core attributes up to the Entity base class constructor. Time Complexity: O(1)
+  * Parameters: id, dest, timeStr, groupSize (or capacity)
+  * Returns: N/A
+  */
 Passenger::Passenger(const std::string& id, const std::string& dest, const std::string& timeStr, int gSize)
 	: Entity(id, dest, timeStr), gSize(gSize) {
 }

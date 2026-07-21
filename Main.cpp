@@ -13,6 +13,14 @@
  * ============================================================================
  */
 
+
+ /*
+  * Function: main
+  * Author: Izz Faris Putra Bin Maskhurin
+  * Description: Application entry point. Instantiates core dependencies (Repo, Generator, FileParser) and injects them into the UI loop. Time Complexity: O(1) setup.
+  * Parameters: None
+  * Returns: int (exit status)
+  */
 int main() {
     std::cout << "System Initializing...\n";
 

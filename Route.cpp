@@ -11,8 +11,24 @@
  * ============================================================================
  */
 
+
+ /*
+  * Function: Route (Constructor)
+  * Author: Izz Faris Putra Bin Maskhurin
+  * Description: Initializes a Route wrapping a single Shuttle pointer. Time Complexity: O(1)
+  * Parameters: s (Shuttle*)
+  * Returns: N/A
+  */
 Route::Route(Shuttle* s) : sManage(s) {}
 
+
+/*
+ * Function: addPassenger
+ * Author: Izz Faris Putra Bin Maskhurin
+ * Description: Appends a matched Passenger pointer to the route's collection. Time Complexity: O(1) amortized
+ * Parameters: p (Passenger*)
+ * Returns: void
+ */
 void Route::addPassenger(Passenger* p) {
 	if (p != nullptr) {
 		pManage.push_back(p);
