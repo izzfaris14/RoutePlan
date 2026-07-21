@@ -1,10 +1,11 @@
 #include "UIControl.h"
-#include "ValidService.h"
 #include <iostream>
 #include <string>
 #include <fstream>
-#include <regex>
+#include <limits>
+#include <cctype>
 
+// Thread-safe and memory-safe Singleton instance
 UIControl& UIControl::getInstance() {
     static UIControl instance;
     return instance;
@@ -23,6 +24,37 @@ void UIControl::displayMatches(const SchedRepo& repo) const {
     std::cout << "---------------------------------\n";
 }
 
+void UIControl::displayAllEntities(const SchedRepo& repo) const {
+    std::cout << "\n=== Current Passengers in RAM ===\n";
+    if (repo.getPassengerCount() == 0) {
+        std::cout << "None recorded.\n";
+    }
+    else {
+        for (size_t i = 0; i < repo.getPassengerCount(); i++) {
+            Passenger* p = repo.getPassenger(i);
+            std::cout << "ID: " << p->getId()
+                << ", Dest: " << p->getDest()
+                << ", Time: " << p->getTimeStr()
+                << ", Group Size: " << p->getGroupSize() << "\n";
+        }
+    }
+
+    std::cout << "\n=== Current Shuttles in RAM ===\n";
+    if (repo.getShuttleCount() == 0) {
+        std::cout << "None recorded.\n";
+    }
+    else {
+        for (size_t i = 0; i < repo.getShuttleCount(); i++) {
+            Shuttle* s = repo.getShuttle(i);
+            std::cout << "ID: " << s->getId()
+                << ", Dest: " << s->getDest()
+                << ", Time: " << s->getTimeStr()
+                << ", Capacity: " << s->getCapacity() << "\n";
+        }
+    }
+    std::cout << "---------------------------------\n";
+}
+
 void UIControl::startMenu(SchedRepo& repo, SchedGenerator& generator) {
     bool running = true;
     int choice = 0;
@@ -31,14 +63,14 @@ void UIControl::startMenu(SchedRepo& repo, SchedGenerator& generator) {
         std::cout << "\n=========================================\n";
         std::cout << "   Driverless Transport System Menu      \n";
         std::cout << "=========================================\n";
-        std::cout << "1. Generate by Minimum Shuttle Dispatch\n"; 
-        std::cout << "2. Generate by Passenger Arrival Time\n";   
+        std::cout << "1. Generate by Minimum Shuttle Dispatch\n";
+        std::cout << "2. Generate by Passenger Arrival Time\n";
         std::cout << "3. Display Current Matches\n";
-        std::cout << "4. Add/Edit/Delete Passenger\n";       
-        std::cout << "5. Add/Edit/Delete Shuttle\n";           
-        std::cout << "6. Save Route Plan to Text File\n";    
-        std::cout << "7. Save Entity Data to Text Files\n";  
-        std::cout << "8. Display All Entities\n";
+        std::cout << "4. Add/Edit/Delete Passenger\n";
+        std::cout << "5. Add/Edit/Delete Shuttle\n";
+        std::cout << "6. Save Route Plan to Text File\n";
+        std::cout << "7. Save Entity Data to Text Files\n";
+        std::cout << "8. View All Passengers & Shuttles (RAM)\n";
         std::cout << "9. Exit\n";
         std::cout << "=========================================\n";
         std::cout << "Enter your choice (1-9): ";
@@ -77,44 +109,47 @@ void UIControl::startMenu(SchedRepo& repo, SchedGenerator& generator) {
             int gSize;
 
             if (action == 'A' || action == 'a') {
+                // Validate Passenger ID format (Must start with P)
                 while (true) {
-                    std::cout << "Enter Passenger ID (e.g., P1, P25): ";
+                    std::cout << "Enter P.ID (Must start with 'P', e.g., P01): ";
                     std::cin >> id;
-                    if (ValidService::isValidPassengerId(id))
-                        break;
-                    std::cout << "Invalid Passenger ID! Format must be P followed by numbers only.\n";
+                    if (id.length() >= 2 && (id[0] == 'P' || id[0] == 'p')) break;
+                    std::cout << "Invalid ID format! Passenger ID must start with 'P'.\n";
                 }
 
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 std::cout << "Enter Dest: ";
                 std::getline(std::cin, dest);
 
+                // Validate Time format (Must contain ':', accept 00-12 hours, and end with am/pm)
                 while (true) {
-                    std::cout << "Enter Time (e.g., 7:20am): ";
+                    std::cout << "Enter time (e.g., 7:20am or 00:00am): ";
                     std::cin >> timeStr;
-                    if (ValidService::isValidTimeFormat(timeStr)) {
-                        if (ValidService::isValidOperatingHour(timeStr)) {
-                            break;
-                        }
-                        std::cout << "Time is outside of valid operating hours (6:00am to 12:59am).\n";
-                    } else {
-                        std::cout << "Invalid time format! Use HH:MMam/pm.\n";
-                    }
+                    bool hasColon = (timeStr.find(':') != std::string::npos);
+                    bool hasSuffix = (timeStr.length() >= 3 &&
+                        (timeStr.rfind("am") == timeStr.length() - 2 ||
+                            timeStr.rfind("pm") == timeStr.length() - 2));
+
+                    // Extract hour part before the colon to check if it's 0, 00, or standard 1-12
+                    size_t colonPos = timeStr.find(':');
+                    std::string hourPart = timeStr.substr(0, colonPos);
+                    bool validHour = (hourPart == "0" || hourPart == "00" ||
+                        (hourPart.length() > 0 && std::stoi(hourPart) >= 1 && std::stoi(hourPart) <= 12));
+
+                    if (hasColon && hasSuffix && validHour) break;
+                    std::cout << "Invalid time format! Must be between 00:00am and 12:59am/pm (e.g., 00:00am or 7:20am).\n";
                 }
 
                 while (true) {
-                    std::cout << "Enter group size (1-15): ";
-                    if (std::cin >> gSize) break;
+                    std::cout << "Enter group size (Numbers only): ";
+                    if (std::cin >> gSize && gSize > 0) break;
                     std::cin.clear();
                     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                    std::cout << "Invalid input! Please enter a number.\n";
+                    std::cout << "Invalid group size! Please enter a valid number.\n";
                 }
 
-                int originalSize = gSize;
-                gSize = ValidService::capPassengerGroupSize(gSize);
-
-                if (gSize != originalSize) {
-                    std::cout << "Warning: Group size (" << originalSize << ") exceeds standard maximum capacity of 15.\n";
+                if (gSize > 15) {
+                    std::cout << "Warning: Group size (" << gSize << ") exceeds standard maximum capacity of 15.\n";
                     std::cout << "Do you still want to add this passenger and cap at 15? (Y/N): ";
                     char confirm;
                     std::cin >> confirm;
@@ -122,6 +157,7 @@ void UIControl::startMenu(SchedRepo& repo, SchedGenerator& generator) {
                         std::cout << "Operation cancelled. Passenger not added.\n";
                         break;
                     }
+                    gSize = 15;
                 }
 
                 repo.addPassenger(std::make_unique<Passenger>(id, dest, timeStr, gSize));
@@ -131,51 +167,51 @@ void UIControl::startMenu(SchedRepo& repo, SchedGenerator& generator) {
             else if (action == 'E' || action == 'e') {
                 std::cout << "Enter ID of Passenger to Edit: ";
                 std::cin >> id;
-                if (repo.getPassengerById(id) == nullptr) {
-                    std::cout << "Error: Passenger ID not found.\n";
-                    break;
-                }
 
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 std::cout << "Enter New Dest: ";
-                std::getline(std::cin >> std::ws, dest);
+                std::getline(std::cin, dest);
 
                 while (true) {
-                    std::cout << "Enter New Time (e.g., 7:20am): ";
+                    std::cout << "Enter time (e.g., 7:20am or 00:00am): ";
                     std::cin >> timeStr;
-                    if (ValidService::isValidTimeFormat(timeStr)) {
-                        if (ValidService::isValidOperatingHour(timeStr)) {
-                            break;
-                        }
-                        std::cout << "Time is outside of valid operating hours (6:00am to 12:59am).\n";
-                    } else {
-                        std::cout << "Invalid time format! Use HH:MMam/pm.\n";
-                    }
+                    bool hasColon = (timeStr.find(':') != std::string::npos);
+                    bool hasSuffix = (timeStr.length() >= 3 &&
+                        (timeStr.rfind("am") == timeStr.length() - 2 ||
+                            timeStr.rfind("pm") == timeStr.length() - 2));
+
+
+                    size_t colonPos = timeStr.find(':');
+                    std::string hourPart = timeStr.substr(0, colonPos);
+                    bool validHour = (hourPart == "0" || hourPart == "00" ||
+                        (hourPart.length() > 0 && std::stoi(hourPart) >= 1 && std::stoi(hourPart) <= 12));
+
+                    if (hasColon && hasSuffix && validHour) break;
+                    std::cout << "Invalid time format! Must be between 00:00am and 12:59am/pm (e.g., 00:00am or 7:20am).\n";
                 }
-                
+
                 while (true) {
-                    std::cout << "Enter New Group Size (1-15): ";
-                    if (std::cin >> gSize) break;
+                    std::cout << "Enter New Group Size (Numbers only): ";
+                    if (std::cin >> gSize && gSize > 0) break;
                     std::cin.clear();
                     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                    std::cout << "Invalid input! Please enter a number.\n";
+                    std::cout << "Invalid group size! Please enter a valid number.\n";
                 }
 
-                int originalSize = gSize;
-                gSize = ValidService::capPassengerGroupSize(gSize);
-
-                if (gSize != originalSize) {
-					std::cout << "Warning: Group size (" << originalSize << ") exceeds standard maximum capacity of 15.\n";
-					std::cout << "Do you still want to edit this passenger and cap at 15? (Y/N): ";
-					char confirm;
-					std::cin >> confirm;
-					if (confirm != 'Y' && confirm != 'y') {
-						std::cout << "Operation cancelled. Passenger not edited.\n";
-						break;
-					}
+                if (gSize > 15) {
+                    std::cout << "Warning: Group size (" << gSize << ") exceeds standard maximum capacity of 15.\n";
+                    std::cout << "Do you still want to update and cap at 15? (Y/N): ";
+                    char confirm;
+                    std::cin >> confirm;
+                    if (confirm != 'Y' && confirm != 'y') {
+                        std::cout << "Operation cancelled. Passenger not updated.\n";
+                        break;
+                    }
+                    gSize = 15;
                 }
 
                 if (repo.editPassenger(id, dest, timeStr, gSize)) {
+                    repo.clearRoutes();
                     std::cout << "Passenger updated successfully.\n";
                 }
                 else {
@@ -186,6 +222,7 @@ void UIControl::startMenu(SchedRepo& repo, SchedGenerator& generator) {
                 std::cout << "Enter ID of Passenger to Delete: ";
                 std::cin >> id;
                 if (repo.removePassenger(id)) {
+                    repo.clearRoutes();
                     std::cout << "Passenger deleted successfully.\n";
                 }
                 else {
@@ -201,37 +238,41 @@ void UIControl::startMenu(SchedRepo& repo, SchedGenerator& generator) {
             char action;
             std::cin >> action;
 
-            std::string id, dest, timeStr, modelStr;
+            std::string id, dest, timeStr, capStr;
+            int cap = 2; // Default Small
 
             if (action == 'A' || action == 'a') {
+                // Validate Shuttle ID format (Must start with S)
                 while (true) {
-                    std::cout << "Enter Shuttle ID (e.g., S1, S25): ";
+                    std::cout << "Enter S.ID (Must start with 'S', e.g., S01): ";
                     std::cin >> id;
-                    if (ValidService::isValidShuttleId(id))
-                        break;
-                    std::cout << "Invalid Shuttle ID! Format must be S followed by numbers only.\n";
+                    if (id.length() >= 2 && (id[0] == 'S' || id[0] == 's')) break;
+                    std::cout << "Invalid ID format! Shuttle ID must start with 'S'.\n";
                 }
 
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 std::cout << "Enter Charging Point: ";
-                std::getline(std::cin >> std::ws, dest);
+                std::getline(std::cin, dest);
 
+                // Validate Time format (Must contain ':' and end with am/pm)
                 while (true) {
-                    std::cout << "Enter Time (e.g., 7:20am): ";
+                    std::cout << "Enter time (e.g., 7:20am or 00:00am): ";
                     std::cin >> timeStr;
-                    if (ValidService::isValidTimeFormat(timeStr)) {
-                        if (ValidService::isValidOperatingHour(timeStr)) {
-                            break;
-                        }
-                        std::cout << "Time is outside of valid operating hours (6:00am to 12:59am).\n";
-                    } else {
-                        std::cout << "Invalid time format! Use HH:MMam/pm.\n";
-                    }
+                    bool hasColon = (timeStr.find(':') != std::string::npos);
+                    bool hasSuffix = (timeStr.length() >= 3 &&
+                        (timeStr.rfind("am") == timeStr.length() - 2 ||
+                            timeStr.rfind("pm") == timeStr.length() - 2));
+                    if (hasColon && hasSuffix) break;
+                    std::cout << "Invalid time format! Must contain ':' and end with 'am' or 'pm'.\n";
                 }
 
                 std::cout << "Enter Model (Small/Family/Premium): ";
-                std::cin >> modelStr;
-                int cap = ValidService::mapShuttleModelToCapacity(modelStr);
+                std::cin >> capStr;
+
+                if (capStr == "Small") cap = 2;
+                else if (capStr == "Family") cap = 5;
+                else if (capStr == "Premium") cap = 12;
+                else cap = 2;
 
                 repo.addShuttle(std::make_unique<Shuttle>(id, dest, timeStr, cap));
                 repo.clearRoutes();
@@ -240,31 +281,29 @@ void UIControl::startMenu(SchedRepo& repo, SchedGenerator& generator) {
             else if (action == 'E' || action == 'e') {
                 std::cout << "Enter ID of Shuttle to Edit: ";
                 std::cin >> id;
-                if (repo.getShuttleById(id) == nullptr) {
-                    std::cout << "Error: Shuttle ID not found.\n";
-                    break;
-                }
 
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 std::cout << "Enter New Charging Point: ";
-                std::getline(std::cin >> std::ws, dest);
+                std::getline(std::cin, dest);
 
                 while (true) {
                     std::cout << "Enter New Time (e.g., 7:20am): ";
                     std::cin >> timeStr;
-                    if (ValidService::isValidTimeFormat(timeStr)) {
-                        if (ValidService::isValidOperatingHour(timeStr)) {
-                            break;
-                        }
-                        std::cout << "Time is outside of valid operating hours (6:00am to 12:59am).\n";
-                    } else {
-                        std::cout << "Invalid time format! Use HH:MMam/pm.\n";
-                    }
+                    bool hasColon = (timeStr.find(':') != std::string::npos);
+                    bool hasSuffix = (timeStr.length() >= 3 &&
+                        (timeStr.rfind("am") == timeStr.length() - 2 ||
+                            timeStr.rfind("pm") == timeStr.length() - 2));
+                    if (hasColon && hasSuffix) break;
+                    std::cout << "Invalid time format! Must contain ':' and end with 'am' or 'pm'.\n";
                 }
 
                 std::cout << "Enter New Model (Small/Family/Premium): ";
-                std::cin >> modelStr;
-                int cap = ValidService::mapShuttleModelToCapacity(modelStr);
+                std::cin >> capStr;
+
+                if (capStr == "Small") cap = 2;
+                else if (capStr == "Family") cap = 5;
+                else if (capStr == "Premium") cap = 12;
+                else cap = 2;
 
                 if (repo.editShuttle(id, dest, timeStr, cap)) {
                     std::cout << "Shuttle updated successfully.\n";
@@ -305,6 +344,7 @@ void UIControl::startMenu(SchedRepo& repo, SchedGenerator& generator) {
         case 7: {
             std::cout << "\n--- Saving Entity Data ---\n";
 
+            // Save Passengers
             std::ofstream pFile("new_passengers.txt");
             if (pFile.is_open()) {
                 for (size_t i = 0; i < repo.getPassengerCount(); i++) {
@@ -319,13 +359,18 @@ void UIControl::startMenu(SchedRepo& repo, SchedGenerator& generator) {
                 std::cout << "Error: Could not write to new_passengers.txt\n";
             }
 
+            // Save Shuttles
             std::ofstream sFile("new_shuttles.txt");
             if (sFile.is_open()) {
                 for (size_t i = 0; i < repo.getShuttleCount(); i++) {
                     Shuttle* s = repo.getShuttle(i);
-                    std::string modelStr = ValidService::mapCapacityToShuttleModel(s->getCapacity());
+
+                    std::string capStr = "Small";
+                    if (s->getCapacity() == 5) capStr = "Family";
+                    else if (s->getCapacity() == 12) capStr = "Premium";
+
                     sFile << s->getId() << ", " << s->getDest() << ", "
-                        << s->getTimeStr() << ", " << modelStr << "\n";
+                        << s->getTimeStr() << ", " << capStr << "\n";
                 }
                 sFile.close();
                 std::cout << "Shuttles saved to new_shuttles.txt\n";
@@ -337,7 +382,6 @@ void UIControl::startMenu(SchedRepo& repo, SchedGenerator& generator) {
         }
 
         case 8:
-
             std::cout << "Displaying all entities in RAM.\n";
             std::cout << "--- Shuttles ---\n";
             for (size_t i = 0; i < repo.getShuttleCount(); i++) {
@@ -349,11 +393,10 @@ void UIControl::startMenu(SchedRepo& repo, SchedGenerator& generator) {
             }
             break;
 
-		case 9:
+        case 9:
             std::cout << "Exiting system. Goodbye.\n";
             running = false;
             break;
-
 
         default:
             std::cout << "\nInvalid choice. Please select 1-9.\n";
