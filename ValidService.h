@@ -3,10 +3,10 @@
 
 /*
  * ============================================================================
- * Class: UIControl
+ * Class: ValidService
  * Author: Farid Abqary Bin Zainuddin
- * Description: Manages the interactive command-line interface, user prompts,
- * and overarching menu loops.
+ * Description: Provides static validation services to ensure data integrity
+ * for both user RAM inputs and parsed file strings.
  * ============================================================================
  */
 
