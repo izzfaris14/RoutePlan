@@ -17,6 +17,14 @@
  * ============================================================================
  */
 
+
+ /*
+  * Function: trim
+  * Author: Lex Lee Gao Hao
+  * Description: Static helper utility to safely remove leading and trailing whitespace/hidden characters from extracted file strings. Time Complexity: O(N)
+  * Parameters: str (string)
+  * Returns: string (trimmed)
+  */
 static std::string trim(const std::string& str) {
     size_t first = str.find_first_not_of(" \t\r\n");
     if (std::string::npos == first) return "";
@@ -24,7 +32,13 @@ static std::string trim(const std::string& str) {
     return str.substr(first, (last - first + 1));
 }
 
-
+/*
+ * Function: createShuttle / createPassenger (Factories)
+ * Author: Lex Lee Gao Hao
+ * Description: Factory methods to instantiate unique_ptrs of entities during file parsing. Time Complexity: O(1)
+ * Parameters: id, dest, timeStr, capacity/gSize
+ * Returns: unique_ptr of Shuttle or Passenger
+ */
 std::unique_ptr<Shuttle> FileParser::createShuttle(const std::string& id, const std::string& dest, const std::string& timeStr, int cap) {
     return std::make_unique<Shuttle>(id, dest, timeStr, cap);
 }
@@ -33,6 +47,14 @@ std::unique_ptr<Passenger> FileParser::createPassenger(const std::string& id, co
     return std::make_unique<Passenger>(id, dest, timeStr, size);
 }
 
+
+/*
+ * Function: createShuttle / createPassenger (Factories)
+ * Author: Lex Lee Gao Hao
+ * Description: Factory methods to instantiate unique_ptrs of entities during file parsing. Time Complexity: O(1)
+ * Parameters: id, dest, timeStr, capacity/gSize
+ * Returns: unique_ptr of Shuttle or Passenger
+ */
 void FileParser::loadShuttles(const std::string& filename, SchedRepo& repo) {
     std::ifstream file(filename);
     if (!file.is_open()) {
