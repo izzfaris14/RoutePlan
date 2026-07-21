@@ -1,27 +1,28 @@
-#define _CRT_SECURE_NO_WARNINGS
-#include<iostream>
 #include "Entity.h"
 
 using namespace std;
 
-Entity::Entity(string id, string dest, string timeStr)  : id(id), dest(dest), timeStr(timeStr), isAssigned(false) {}
+// Member initializer list for optimal construction
+Entity::Entity(const string& id, const string& dest, const string& timeStr)
+    : id(id), dest(dest), timeStr(timeStr), isAssigned(false) {
+}
 
 string Entity::getId() const {
-	return id;
+    return id;
 }
 
 string Entity::getDest() const {
-	return dest;
+    return dest;
 }
 
 string Entity::getTimeStr() const {
-	return timeStr;
+    return timeStr;
 }
 
 bool Entity::getIsAssigned() const {
-	return isAssigned;
+    return isAssigned;
 }
 
 void Entity::setAssigned(bool assigned) {
-	isAssigned = assigned;
+    isAssigned = assigned;
 }

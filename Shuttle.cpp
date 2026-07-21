@@ -1,10 +1,13 @@
-#include"Shuttle.h"
+#include "Shuttle.h"
 
-Shuttle::Shuttle(std::string id, std::string dest, std::string timeStr, int capacity)
-	:Entity(id, dest, timeStr), cap(capacity) {
+// Changed to const std::string& to match the header and Entity base class
+Shuttle::Shuttle(const std::string& id, const std::string& dest, const std::string& timeStr, int capacity)
+	: Entity(id, dest, timeStr), cap(capacity) {
 }
 
-int Shuttle::getCapacity() const { return cap; }
+int Shuttle::getCapacity() const {
+	return cap;
+}
 
 void Shuttle::setCapacity(int c) {
 	cap = c;

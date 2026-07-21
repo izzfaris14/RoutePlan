@@ -1,10 +1,18 @@
 #pragma once
 #include "SchedRepo.h"
+#include "SchedGenerator.h"
 
 class UIControl {
-	static UIControl* instance;
-	UIControl() {}
+private:
+    UIControl() = default;
+
 public:
-	static UIControl* getInstance();
-	void displayMatches(const SchedRepo& repo);
+    UIControl(const UIControl&) = delete;
+    void operator=(const UIControl&) = delete;
+
+    static UIControl& getInstance();
+
+    void startMenu(SchedRepo& repo, SchedGenerator& generator);
+
+    void displayMatches(const SchedRepo& repo) const;
 };

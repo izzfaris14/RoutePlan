@@ -1,18 +1,26 @@
 #include "Route.h"
+#include "Shuttle.h"
+#include "Passenger.h" 
 
-Route::Route(Shuttle* s) :sManage(s) {}
+Route::Route(Shuttle* s) : sManage(s) {}
 
 void Route::addPassenger(Passenger* p) {
-	pManage.push_back(p);
+	if (p != nullptr) { // Defensive programming
+		pManage.push_back(p);
+	}
 }
 
 size_t Route::getPassengerCount() const {
 	return pManage.size();
 }
 
-Shuttle* Route::getShuttle() const { return sManage; }
+Shuttle* Route::getShuttle() const {
+	return sManage;
+}
 
-const std::vector<Passenger*>& Route::getPassengers() const { return pManage; }
+const std::vector<Passenger*>& Route::getPassengers() const {
+	return pManage;
+}
 
 int Route::getCurrentOccupancy() const {
 	int total = 0;
@@ -25,11 +33,13 @@ int Route::getCurrentOccupancy() const {
 std::string Route::getRouteString() const {
 	std::string res = "Shuttle: " + sManage->getId() + " | Occupancy: " +
 		std::to_string(getCurrentOccupancy()) + "/" + std::to_string(sManage->getCapacity()) + "\nPassenger:";
+
 	if (pManage.empty()) {
 		res += "None";
 	}
+
 	for (const auto& p : pManage) {
-		res += p->getId() + " ";
+		res += " " + p->getId();
 	}
 	return res;
 }

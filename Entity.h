@@ -1,25 +1,28 @@
 #pragma once
 #include <string>
 
-using namespace std;
-
 class Entity {
-    string id;
-    string dest;
-    string timeStr;
-    bool isAssigned; // fixes 1-to-1 bug
+private: // Explicit encapsulation to protect class invariants
+    std::string id;
+    std::string dest;
+    std::string timeStr;
+    bool isAssigned;
+
 public:
-    Entity(string id, string dest, string timeStr);
-    virtual ~Entity() {} //virtual destructor for polymorphism
+    // Strings are passed by constant reference to prevent memory copying
+    Entity(const std::string& id, const std::string& dest, const std::string& timeStr);
 
+    // Virtual destructor ensures derived class destructors are called cleanly
+    virtual ~Entity() {}
 
-    string getId() const;
-    string getDest() const;
-    string getTimeStr() const;
+    std::string getId() const;
+    std::string getDest() const;
+    std::string getTimeStr() const;
+    bool getIsAssigned() const;
 
-	bool getIsAssigned() const;
-	void setAssigned(bool assigned);
+    void setAssigned(bool assigned);
 
-    virtual string getDeets() const = 0; //pure virtual function making this an abstract base class
+    // Pure virtual functions forcing polymorphic behavior in derived classes
+    virtual std::string getDeets() const = 0;
     virtual bool isAvailable() const = 0;
 };

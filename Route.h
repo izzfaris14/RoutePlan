@@ -5,6 +5,7 @@
 #include "Passenger.h"
 
 class Route {
+private:
 	Shuttle* sManage;
 	std::vector<Passenger*> pManage;
 
@@ -18,4 +19,4 @@ public:
 	Shuttle* getShuttle() const;
 	const std::vector<Passenger*>& getPassengers() const;
 	int getCurrentOccupancy() const;
-};
+}; 

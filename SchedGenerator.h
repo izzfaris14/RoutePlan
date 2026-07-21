@@ -3,7 +3,13 @@
 #include <string>
 
 class SchedGenerator {
-	int parseTimeStr(const std::string& timeStr) const;
+private:
+   
+    int parseTimeStr(const std::string& timeStr) const;
+
 public:
-	void generateMatches(SchedRepo& repo);
+    // added algorithm parameter: 
+    // 1 = Minimum Shuttle Dispatch (Capacity descending)
+    // 2 = Passenger Arrival Time (Time ascending)
+    void generateMatches(SchedRepo& repo, int algorithmMode);
 };

@@ -1,13 +1,15 @@
 #pragma once
 #include "Entity.h"
-#include <string>
 
-class Passenger :public Entity {
-	int gSize;
+class Passenger : public Entity {
+private:
+    int gSize;
+
 public:
-	Passenger(std::string id, std::string dest, std::string timeStr, int gSize);
-	int getGroupSize() const;
-	std::string getDeets() const override;
-	bool isAvailable() const override;
+    // This signature must match the .cpp file exactly
+    Passenger(const std::string& id, const std::string& dest, const std::string& timeStr, int gSize);
 
+    int getGroupSize() const;
+    std::string getDeets() const override;
+    bool isAvailable() const override;
 };
