@@ -24,37 +24,6 @@ void UIControl::displayMatches(const SchedRepo& repo) const {
     std::cout << "---------------------------------\n";
 }
 
-void UIControl::displayAllEntities(const SchedRepo& repo) const {
-    std::cout << "\n=== Current Passengers in RAM ===\n";
-    if (repo.getPassengerCount() == 0) {
-        std::cout << "None recorded.\n";
-    }
-    else {
-        for (size_t i = 0; i < repo.getPassengerCount(); i++) {
-            Passenger* p = repo.getPassenger(i);
-            std::cout << "ID: " << p->getId()
-                << ", Dest: " << p->getDest()
-                << ", Time: " << p->getTimeStr()
-                << ", Group Size: " << p->getGroupSize() << "\n";
-        }
-    }
-
-    std::cout << "\n=== Current Shuttles in RAM ===\n";
-    if (repo.getShuttleCount() == 0) {
-        std::cout << "None recorded.\n";
-    }
-    else {
-        for (size_t i = 0; i < repo.getShuttleCount(); i++) {
-            Shuttle* s = repo.getShuttle(i);
-            std::cout << "ID: " << s->getId()
-                << ", Dest: " << s->getDest()
-                << ", Time: " << s->getTimeStr()
-                << ", Capacity: " << s->getCapacity() << "\n";
-        }
-    }
-    std::cout << "---------------------------------\n";
-}
-
 void UIControl::startMenu(SchedRepo& repo, SchedGenerator& generator) {
     bool running = true;
     int choice = 0;
@@ -392,7 +361,6 @@ void UIControl::startMenu(SchedRepo& repo, SchedGenerator& generator) {
                 std::cout << repo.getPassenger(i)->getDeets() << "\n";
             }
             break;
-
         case 9:
             std::cout << "Exiting system. Goodbye.\n";
             running = false;
