@@ -59,14 +59,18 @@ void SchedGenerator::generateMatches(SchedRepo& repo, int algorithmMode) {
             if (p->getIsAssigned()) continue;
 
             int passTime = parseTimeStr(p->getTimeStr());
+            int shuttleTime = parseTimeStr(s->getTimeStr());
             int timeDiff = passTime - shuttleTime;
 
-            // handle midnight timing
-            if (timeDiff < 0) {
-                timeDiff += 1440; // add total minutes in a day
+            //  midnight adjustment
+            if (timeDiff < -720) {
+                timeDiff += 1440;
+            }
+            else if (timeDiff > 720) {
+                timeDiff -= 1440;
             }
 
-            bool timeValid = (timeDiff >= 0 && timeDiff <= 10);
+            bool timeValid = (std::abs(timeDiff) <= 10);
 
             if (p->getDest() == s->getDest() && timeValid) {
                 if (s->getCapacity() >= (newRoute.getCurrentOccupancy() + p->getGroupSize())) {

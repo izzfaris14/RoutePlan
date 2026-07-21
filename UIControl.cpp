@@ -11,6 +11,17 @@ UIControl& UIControl::getInstance() {
     return instance;
 }
 
+std::string trim(const std::string& str)
+{
+    size_t first = str.find_first_not_of(" \t\r\n");
+    if (first == std::string::npos)
+        return "";
+
+    size_t last = str.find_last_not_of(" \t\r\n");
+    return str.substr(first, last - first + 1);
+}
+
+
 void UIControl::displayMatches(const SchedRepo& repo) const {
     std::cout << "\n=== System Scheduling Matches ===\n";
     if (repo.getRouteCount() == 0) {
@@ -82,6 +93,7 @@ void UIControl::startMenu(SchedRepo& repo, SchedGenerator& generator) {
                 while (true) {
                     std::cout << "Enter P.ID (Must start with 'P', e.g., P01): ";
                     std::cin >> id;
+                    id = trim(id);
                     if (id.length() >= 2 && (id[0] == 'P' || id[0] == 'p')) break;
                     std::cout << "Invalid ID format! Passenger ID must start with 'P'.\n";
                 }
@@ -89,11 +101,13 @@ void UIControl::startMenu(SchedRepo& repo, SchedGenerator& generator) {
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 std::cout << "Enter Dest: ";
                 std::getline(std::cin, dest);
+                dest = trim(dest);
 
                 // Validate Time format (Must contain ':', accept 00-12 hours, and end with am/pm)
                 while (true) {
                     std::cout << "Enter time (e.g., 7:20am or 00:00am): ";
                     std::cin >> timeStr;
+                    timeStr = trim(timeStr);
                     bool hasColon = (timeStr.find(':') != std::string::npos);
                     bool hasSuffix = (timeStr.length() >= 3 &&
                         (timeStr.rfind("am") == timeStr.length() - 2 ||
@@ -136,14 +150,17 @@ void UIControl::startMenu(SchedRepo& repo, SchedGenerator& generator) {
             else if (action == 'E' || action == 'e') {
                 std::cout << "Enter ID of Passenger to Edit: ";
                 std::cin >> id;
+                id = trim(id);
 
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 std::cout << "Enter New Dest: ";
                 std::getline(std::cin, dest);
+                dest = trim(dest);
 
                 while (true) {
                     std::cout << "Enter time (e.g., 7:20am or 00:00am): ";
                     std::cin >> timeStr;
+                    timeStr = trim(timeStr);
                     bool hasColon = (timeStr.find(':') != std::string::npos);
                     bool hasSuffix = (timeStr.length() >= 3 &&
                         (timeStr.rfind("am") == timeStr.length() - 2 ||
@@ -190,6 +207,7 @@ void UIControl::startMenu(SchedRepo& repo, SchedGenerator& generator) {
             else if (action == 'D' || action == 'd') {
                 std::cout << "Enter ID of Passenger to Delete: ";
                 std::cin >> id;
+                id = trim(id);
                 if (repo.removePassenger(id)) {
                     repo.clearRoutes();
                     std::cout << "Passenger deleted successfully.\n";
@@ -237,6 +255,7 @@ void UIControl::startMenu(SchedRepo& repo, SchedGenerator& generator) {
 
                 std::cout << "Enter Model (Small/Family/Premium): ";
                 std::cin >> capStr;
+                capStr = trim(capStr);
 
                 if (capStr == "Small") cap = 2;
                 else if (capStr == "Family") cap = 5;
@@ -268,6 +287,7 @@ void UIControl::startMenu(SchedRepo& repo, SchedGenerator& generator) {
 
                 std::cout << "Enter New Model (Small/Family/Premium): ";
                 std::cin >> capStr;
+                capStr = trim(capStr);
 
                 if (capStr == "Small") cap = 2;
                 else if (capStr == "Family") cap = 5;
@@ -284,6 +304,7 @@ void UIControl::startMenu(SchedRepo& repo, SchedGenerator& generator) {
             else if (action == 'D' || action == 'd') {
                 std::cout << "Enter ID of Shuttle to Delete: ";
                 std::cin >> id;
+                id = trim(id);
                 if (repo.removeShuttle(id)) {
                     std::cout << "Shuttle deleted successfully.\n";
                 }
