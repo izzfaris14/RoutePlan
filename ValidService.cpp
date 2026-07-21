@@ -2,6 +2,15 @@
 #include <regex>
 #include <sstream>
 
+/*
+ * ============================================================================
+ * Class: UIControl
+ * Author: Farid Abqary Bin Zainuddin
+ * Description: Manages the interactive command-line interface, user prompts,
+ * and overarching menu loops.
+ * ============================================================================
+ */
+
 bool ValidService::isValidTimeFormat(const std::string& timeStr) {
     static const std::regex timePattern("^(0?[1-9]|1[0-2]):[0-5][0-9](am|pm)$", std::regex_constants::icase);
     return std::regex_match(timeStr, timePattern);

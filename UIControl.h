@@ -2,6 +2,15 @@
 #include "SchedRepo.h"
 #include "SchedGenerator.h"
 
+/*
+ * ============================================================================
+ * Class: UIControl
+ * Author: Farid Abqary Bin Zainuddin
+ * Description: Manages the interactive command-line interface, user prompts,
+ * and overarching menu loops.
+ * ============================================================================
+ */
+
 class UIControl {
 private:
     UIControl() = default;

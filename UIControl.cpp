@@ -5,6 +5,15 @@
 #include <limits>
 #include <cctype>
 
+/*
+ * ============================================================================
+ * Class: UIControl
+ * Author: Farid Abqary Bin Zainuddin
+ * Description: Manages the interactive command-line interface, user prompts,
+ * and overarching menu loops.
+ * ============================================================================
+ */
+
 // Thread-safe and memory-safe Singleton instance
 UIControl& UIControl::getInstance() {
     static UIControl instance;
