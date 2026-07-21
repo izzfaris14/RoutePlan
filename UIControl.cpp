@@ -14,7 +14,13 @@
  * ============================================================================
  */
 
-// Thread-safe and memory-safe Singleton instance
+ /*
+  * Function: getInstance
+  * Author: Farid Abqary Bin Zainuddin
+  * Description: Thread-safe and memory-safe Singleton access point for the UI controller. Time Complexity: O(1)
+  * Parameters: None
+  * Returns: UIControl& (Reference to singleton instance)
+  */
 UIControl& UIControl::getInstance() {
     static UIControl instance;
     return instance;
@@ -44,6 +50,14 @@ void UIControl::displayMatches(const SchedRepo& repo) const {
     std::cout << "---------------------------------\n";
 }
 
+
+/*
+ * Function: startMenu
+ * Author: Farid Abqary Bin Zainuddin
+ * Description: The primary interactive terminal loop allowing users to trigger scheduling, edit RAM entities, and save data. Time Complexity: O(N) per user action.
+ * Parameters: repo (SchedRepo&), generator (SchedGenerator&)
+ * Returns: void
+ */
 void UIControl::startMenu(SchedRepo& repo, SchedGenerator& generator) {
     bool running = true;
     int choice = 0;

@@ -11,11 +11,27 @@
  * ============================================================================
  */
 
+
+ /*
+  * Function: isValidTimeFormat
+  * Author: Farid Abqary Bin Zainuddin
+  * Description: Uses Regex to ensure a time string strictly matches the hh:mm(am/pm) format. Time Complexity: O(1)
+  * Parameters: timeStr (string)
+  * Returns: bool (true if valid)
+  */
 bool ValidService::isValidTimeFormat(const std::string& timeStr) {
     static const std::regex timePattern("^(0?[1-9]|1[0-2]):[0-5][0-9](am|pm)$", std::regex_constants::icase);
     return std::regex_match(timeStr, timePattern);
 }
 
+
+/*
+ * Function: isValidOperatingHour
+ * Author: Farid Abqary Bin Zainuddin
+ * Description: Validates that the input time falls within the 6:00am to 00:00am daily operating window. Time Complexity: O(1)
+ * Parameters: timeStr (string)
+ * Returns: bool
+ */
 bool ValidService::isValidOperatingHour(const std::string& timeStr) {
     if (timeStr.empty() || timeStr.length() < 3) return false;
 
@@ -46,7 +62,13 @@ bool ValidService::isValidShuttleId(const std::string& id) {
     static const std::regex shuttleID("^S[0-9]+$", std::regex_constants::icase);
     return std::regex_match(id, shuttleID);
 }
-
+/*
+ * Function: capPassengerGroupSize
+ * Author: Farid Abqary Bin Zainuddin
+ * Description: Enforces the business rule capping maximum passenger group size to 15. Time Complexity: O(1)
+ * Parameters: groupSize (int)
+ * Returns: int (capped size)
+ */
 int ValidService::capPassengerGroupSize(int groupSize) {
     if (groupSize > 15) {
         return 15;
@@ -57,6 +79,14 @@ int ValidService::capPassengerGroupSize(int groupSize) {
     return groupSize;
 }
 
+
+/*
+ * Function: mapShuttleModelToCapacity (and mapCapacityToShuttleModel)
+ * Author: Farid Abqary Bin Zainuddin
+ * Description: Translates text-based shuttle models (Family, Premium) to numerical seating capacities for the algorithm. Time Complexity: O(1)
+ * Parameters: model (string) or capacity (int)
+ * Returns: int or string
+ */
 int ValidService::mapShuttleModelToCapacity(const std::string& model) {
     std::string lowerModel = model;
     std::transform(lowerModel.begin(), lowerModel.end(), lowerModel.begin(), ::tolower);
