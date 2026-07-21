@@ -2,6 +2,15 @@
 #include <iostream>
 #include <algorithm>
 
+/*
+ * ============================================================================
+ * Class: SchedRepo
+ * Author: Leong Ming Foong
+ * Description: Central data repository managing the lifecycle, memory, and
+ * in-memory storage of all Passenger, Shuttle, and Route objects.
+ * ============================================================================
+ */
+
 void SchedRepo::addShuttle(std::unique_ptr<Shuttle> s) {
     shuttles.push_back(std::move(s));
 }

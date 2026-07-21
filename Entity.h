@@ -1,6 +1,15 @@
 #pragma once
 #include <string>
 
+/*
+ * ============================================================================
+ * Class: Entity
+ * Author: Leong Ming Foong
+ * Description: Abstract base class defining common attributes (ID, destination,
+ * time) and polymorphic interfaces for all transport entities.
+ * ============================================================================
+ */
+
 class Entity {
 private:
     std::string id;

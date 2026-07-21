@@ -1,5 +1,14 @@
 #include "Entity.h"
 
+/*
+ * ============================================================================
+ * Class: Entity
+ * Author: Leong Ming Foong
+ * Description: Abstract base class defining common attributes (ID, destination,
+ * time) and polymorphic interfaces for all transport entities.
+ * ============================================================================
+ */
+
 using namespace std;
 
 Entity::Entity(const string& id, const string& dest, const string& timeStr)

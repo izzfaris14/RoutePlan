@@ -6,6 +6,15 @@
 #include "Passenger.h"
 #include "Route.h"
 
+/*
+ * ============================================================================
+ * Class: SchedRepo
+ * Author: Leong Ming Foong
+ * Description: Central data repository managing the lifecycle, memory, and
+ * in-memory storage of all Passenger, Shuttle, and Route objects.
+ * ============================================================================
+ */
+
 class SchedRepo {
 private:
     std::vector<std::unique_ptr<Shuttle>> shuttles;
