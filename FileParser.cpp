@@ -8,6 +8,15 @@
 #include <memory>
 #include <string>
 
+/*
+ * ============================================================================
+ * Class: FileParser
+ * Author: Lex Lee Gao Hao
+ * Description: A dedicated utility class responsible for all file I/O operations,
+ * string extraction, and protecting the core logic from UI/File dependencies.
+ * ============================================================================
+ */
+
 static std::string trim(const std::string& str) {
     size_t first = str.find_first_not_of(" \t\r\n");
     if (std::string::npos == first) return "";
