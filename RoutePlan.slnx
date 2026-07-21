@@ -1,7 +1,0 @@
-<Solution>
-  <Configurations>
-    <Platform Name="x64" />
-    <Platform Name="x86" />
-  </Configurations>
-  <Project Path="RoutePlan.vcxproj" Id="55af3316-3811-487e-a538-db2c7efa8dd3" />
-</Solution>
