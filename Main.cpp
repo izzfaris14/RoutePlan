@@ -4,6 +4,15 @@
 #include "FileParser.h"
 #include <iostream>
 
+/*
+ * ============================================================================
+ * File: Main.cpp
+ * Author: Izz Faris Putra Bin Maskhurin
+ * Description: Application entry point. Initializes the core system components,
+ * passes dependencies, and triggers the UI control loop.
+ * ============================================================================
+ */
+
 int main() {
     std::cout << "System Initializing...\n";
 

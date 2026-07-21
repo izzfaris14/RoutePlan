@@ -2,6 +2,15 @@
 #include "Shuttle.h"
 #include "Passenger.h" 
 
+/*
+ * ============================================================================
+ * Class: Route
+ * Author: Izz Faris Putra Bin Maskhurin
+ * Description: Represents a successfully matched route, aggregating a single
+ * driverless shuttle and its assigned collection of passengers.
+ * ============================================================================
+ */
+
 Route::Route(Shuttle* s) : sManage(s) {}
 
 void Route::addPassenger(Passenger* p) {

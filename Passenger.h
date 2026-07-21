@@ -1,6 +1,15 @@
 #pragma once
 #include "Entity.h"
 
+/*
+ * ============================================================================
+ * Class: Passenger
+ * Author: Izz Faris Putra Bin Maskhurin
+ * Description: Derived from Entity. Represents a passenger group requesting
+ * transit to a specific destination at a specific time.
+ * ============================================================================
+ */
+
 class Passenger : public Entity {
 private:
     int gSize;

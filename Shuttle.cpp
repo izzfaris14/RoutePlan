@@ -1,5 +1,14 @@
 #include "Shuttle.h"
 
+/*
+ * ============================================================================
+ * Class: Shuttle
+ * Author: Izz Faris Putra Bin Maskhurin
+ * Description: Derived from Entity. Represents a driverless public transport
+ * vehicle with a specific seating capacity and charging destination.
+ * ============================================================================
+ */
+
 Shuttle::Shuttle(const std::string& id, const std::string& dest, const std::string& timeStr, int capacity)
 	: Entity(id, dest, timeStr), cap(capacity) {
 }

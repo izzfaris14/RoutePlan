@@ -1,5 +1,14 @@
 #include "Passenger.h"
 
+/*
+ * ============================================================================
+ * Class: Passenger
+ * Author: Izz Faris Putra Bin Maskhurin
+ * Description: Derived from Entity. Represents a passenger group requesting
+ * transit to a specific destination at a specific time.
+ * ============================================================================
+ */
+
 Passenger::Passenger(const std::string& id, const std::string& dest, const std::string& timeStr, int gSize)
 	: Entity(id, dest, timeStr), gSize(gSize) {
 }

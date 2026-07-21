@@ -2,6 +2,15 @@
 #include <string>
 #include "Entity.h"
 
+/*
+ * ============================================================================
+ * Class: Shuttle
+ * Author: Izz Faris Putra Bin Maskhurin
+ * Description: Derived from Entity. Represents a driverless public transport
+ * vehicle with a specific seating capacity and charging destination.
+ * ============================================================================
+ */
+
 class Shuttle : public Entity {
 private:
     int cap;
