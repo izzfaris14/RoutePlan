@@ -28,6 +28,7 @@
     <ClCompile Include="SchedRepo.cpp" />
     <ClCompile Include="Shuttle.cpp" />
     <ClCompile Include="UIControl.cpp" />
+    <ClCompile Include="ValidService.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h" />
