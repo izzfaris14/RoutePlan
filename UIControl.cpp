@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <regex>
 
 // Thread-safe and memory-safe Singleton instance
 UIControl& UIControl::getInstance() {
@@ -76,19 +77,44 @@ void UIControl::startMenu(SchedRepo& repo, SchedGenerator& generator) {
             int gSize;
 
             if (action == 'A' || action == 'a') {
-                std::cout << "Enter P.ID: ";
-                std::cin >> id;
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear buffer
+                std::regex passengerID("^P[0-9]+$", std::regex_constants::icase);
+                while (true) {
+                    std::cout << "Enter Passenger ID (e.g., P1, P25): ";
+                    std::cin >> id;
+
+                    if (std::regex_match(id, passengerID))
+                        break;
+
+                    std::cout << "Invalid Passenger ID! Format must be P followed by numbers only.\n";
+                }
+
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 std::cout << "Enter Dest: ";
                 std::getline(std::cin, dest);
-                std::cout << "Enter time: ";
-                std::cin >> timeStr;
-                std::cout << "Enter group size (Max 15): ";
-                std::cin >> gSize;
+                std::regex timePattern("^(0?[1-9]|1[0-2]):[0-5][0-9](am|pm)$",
+                std::regex_constants::icase);
+                while (true) {
+                    std::cout << "Enter Time (e.g., 7:20am): ";
+                    std::cin >> timeStr;
+
+                    if (std::regex_match(timeStr, timePattern))
+                        break;
+
+                    std::cout << "Invalid time!\n";
+                    std::cout << "Correct format: HH:MMam or HH:MMpm\n";
+                    std::cout << "Examples: 7:20am  12:45pm\n";
+                }
+                while (true) {
+                    std::cout << "Enter group size (Numbers only): ";
+                    if (std::cin >> gSize && gSize > 0) break;
+                    std::cin.clear();
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    std::cout << "Invalid group size! Please enter a valid number.\n";
+                }
 
                 if (gSize > 15) {
                     std::cout << "Warning: Group size (" << gSize << ") exceeds standard maximum capacity of 15.\n";
-                    std::cout << "Do you still want to add this passenger? (Y/N): ";
+                    std::cout << "Do you still want to add this passenger and cap at 15? (Y/N): ";
                     char confirm;
                     std::cin >> confirm;
                     if (confirm != 'Y' && confirm != 'y') {
@@ -97,9 +123,10 @@ void UIControl::startMenu(SchedRepo& repo, SchedGenerator& generator) {
                     }
                     gSize = 15;
                 }
+
                 repo.addPassenger(std::make_unique<Passenger>(id, dest, timeStr, gSize));
                 repo.clearRoutes();
-                std::cout << "Passenger added to RAM.\n";
+                std::cout << "Passenger added to RAM successfully.\n";
             }
             else if (action == 'E' || action == 'e') {
                 std::cout << "Enter ID of Passenger to Edit: ";
@@ -107,8 +134,17 @@ void UIControl::startMenu(SchedRepo& repo, SchedGenerator& generator) {
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear buffer
                 std::cout << "Enter New Dest: ";
                 std::getline(std::cin >> std::ws, dest);
-                std::cout << "Enter New Time: ";
-                std::cin >> timeStr;
+                std::regex timePattern("^(0?[1-9]|1[0-2]):[0-5][0-9](am|pm)$",
+                std::regex_constants::icase);
+                while (true) {
+                    std::cout << "Enter New Time (e.g., 7:20am): ";
+                    std::cin >> timeStr;
+
+                    if (std::regex_match(timeStr, timePattern))
+                        break;
+
+                    std::cout << "Invalid time format.\n";
+                }
                 std::cout << "Enter New Group Size: ";
                 std::cin >> gSize;
 
