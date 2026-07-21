@@ -11,6 +11,13 @@
 
 using namespace std;
 
+/*
+ * Function: Entity (Constructor)
+ * Author: Leong Ming Foong
+ * Description: Initializes the base Entity with an ID, destination, and time. Time Complexity: O(1)
+ * Parameters: id (string), dest (string), timeStr (string)
+ * Returns: N/A
+ */
 Entity::Entity(const string& id, const string& dest, const string& timeStr)
     : id(id), dest(dest), timeStr(timeStr), isAssigned(false) {
 }

@@ -11,18 +11,51 @@
  * ============================================================================
  */
 
+
+
+ /*
+  * Function: addShuttle
+  * Author: Leong Ming Foong
+  * Description: Moves a dynamically allocated Shuttle into the repository vector. Time Complexity: O(1) amortized
+  * Parameters: s (unique_ptr<Shuttle>)
+  * Returns: void
+  */
 void SchedRepo::addShuttle(std::unique_ptr<Shuttle> s) {
     shuttles.push_back(std::move(s));
 }
 
+
+/*
+ * Function: addPassenger
+ * Author: Leong Ming Foong
+ * Description: Moves a dynamically allocated Passenger into the repository vector. Time Complexity: O(1) amortized
+ * Parameters: p (unique_ptr<Passenger>)
+ * Returns: void
+ */
 void SchedRepo::addPassenger(std::unique_ptr<Passenger> p) {
     passengers.push_back(std::move(p));
 }
 
+
+/*
+ * Function: addRoute
+ * Author: Leong Ming Foong
+ * Description: Stores a successfully matched route in the repository. Time Complexity: O(1) amortized
+ * Parameters: r (Route)
+ * Returns: void
+ */
 void SchedRepo::addRoute(const Route& r) {
     matchedRoutes.push_back(r);
 }
 
+
+/*
+ * Function: clearRoutes
+ * Author: Leong Ming Foong
+ * Description: Clears all existing matched routes from memory before a new schedule generation. Time Complexity: O(N)
+ * Parameters: None
+ * Returns: void
+ */
 void SchedRepo::clearRoutes() {
     matchedRoutes.clear();
 }
