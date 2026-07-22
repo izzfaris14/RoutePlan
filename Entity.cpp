@@ -3,7 +3,7 @@
 /*
  * ============================================================================
  * Class: Entity
- * Author: Leong Ming Foong
+ * Author: Farid Abqary
  * Description: Abstract base class defining common attributes (ID, destination,
  * time) and polymorphic interfaces for all transport entities.
  * ============================================================================
@@ -13,7 +13,7 @@ using namespace std;
 
 /*
  * Function: Entity (Constructor)
- * Author: Leong Ming Foong
+ * Author: Farid Abqary
  * Description: Initializes the base Entity with an ID, destination, and time. Time Complexity: O(1)
  * Parameters: id (string), dest (string), timeStr (string)
  * Returns: N/A
