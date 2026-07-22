@@ -5,7 +5,7 @@
 /*
  * ============================================================================
  * Class: UIControl
- * Author: Farid Abqary Bin Zainuddin
+ * Author: Linus Ong Yong Chun
  * Description: Manages the interactive command-line interface, user prompts,
  * and overarching menu loops.
  * ============================================================================
