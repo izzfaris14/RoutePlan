@@ -36,7 +36,6 @@ std::string trim(const std::string& str)
     return str.substr(first, last - first + 1);
 }
 
-
 void UIControl::displayMatches(const SchedRepo& repo) const {
     std::cout << "\n=== System Scheduling Matches ===\n";
     if (repo.getRouteCount() == 0) {
@@ -49,7 +48,6 @@ void UIControl::displayMatches(const SchedRepo& repo) const {
     }
     std::cout << "---------------------------------\n";
 }
-
 
 /*
  * Function: startMenu
@@ -112,7 +110,6 @@ void UIControl::startMenu(SchedRepo& repo, SchedGenerator& generator) {
             int gSize;
 
             if (action == 'A' || action == 'a') {
-                // Validate Passenger ID format (Must start with P)
                 while (true) {
                     std::cout << "Enter P.ID (Must start with 'P', e.g., P01): ";
                     std::cin >> id;
@@ -140,10 +137,8 @@ void UIControl::startMenu(SchedRepo& repo, SchedGenerator& generator) {
                     if (hasColon && hasSuffix) {
                         size_t colonPos = timeStr.find(':');
                         std::string hourPart = timeStr.substr(0, colonPos);
-                        // Minutes are everything between the colon and the 2-character suffix (am/pm)
                         std::string minPart = timeStr.substr(colonPos + 1, timeStr.length() - colonPos - 3);
 
-                        // Check if hour and minute strings consist purely of digits
                         auto isDigits = [](const std::string& s) {
                             if (s.empty()) return false;
                             for (char c : s) if (!isdigit(c)) return false;
@@ -154,17 +149,31 @@ void UIControl::startMenu(SchedRepo& repo, SchedGenerator& generator) {
                             int h = std::stoi(hourPart);
                             int m = std::stoi(minPart);
 
-                            bool validHour = (h >= 0 && h <= 12); // Accepts 0-12 (with 0/00 or 12 for midnight)
-                            bool validMin = (m >= 0 && m <= 59);   // Strictly restricts minutes to 00-59
+                            bool validHour = (h >= 0 && h <= 12);
+                            bool validMin = (m >= 0 && m <= 59);
 
                             if (validHour && validMin) {
-                                validTime = true;
+                                int h24 = h;
+                                if (timeStr.find("pm") != std::string::npos && h != 12) h24 += 12;
+                                if (timeStr.find("am") != std::string::npos && h == 12) h24 = 0;
+
+                                int totalMins = (h24 * 60) + m;
+
+                                // 05:50am to 11:50pm 
+                                if (totalMins >= 350 && totalMins <= 1430) {
+                                    validTime = true;
+                                }
+                                else {
+                                    std::cout << "Error: Outside operating hours! Passengers allowed 05:50am - 11:50pm.\n";
+                                }
                             }
                         }
                     }
 
                     if (validTime) break;
-                    std::cout << "Invalid time format!.\n";
+                    if (!validTime && timeStr.find(":") != std::string::npos) {
+                        std::cout << "Invalid time format! Minutes must be 00-59.\n";
+                    }
                 }
 
                 while (true) {
@@ -215,10 +224,8 @@ void UIControl::startMenu(SchedRepo& repo, SchedGenerator& generator) {
                     if (hasColon && hasSuffix) {
                         size_t colonPos = timeStr.find(':');
                         std::string hourPart = timeStr.substr(0, colonPos);
-                        // Minutes are everything between the colon and the 2-character suffix (am/pm)
                         std::string minPart = timeStr.substr(colonPos + 1, timeStr.length() - colonPos - 3);
 
-                        // Check if hour and minute strings consist purely of digits
                         auto isDigits = [](const std::string& s) {
                             if (s.empty()) return false;
                             for (char c : s) if (!isdigit(c)) return false;
@@ -229,17 +236,31 @@ void UIControl::startMenu(SchedRepo& repo, SchedGenerator& generator) {
                             int h = std::stoi(hourPart);
                             int m = std::stoi(minPart);
 
-                            bool validHour = (h >= 0 && h <= 12); // Accepts 0-12 (with 0/00 or 12 for midnight)
-                            bool validMin = (m >= 0 && m <= 59);   // Strictly restricts minutes to 00-59
+                            bool validHour = (h >= 0 && h <= 12);
+                            bool validMin = (m >= 0 && m <= 59);
 
                             if (validHour && validMin) {
-                                validTime = true;
+                                int h24 = h;
+                                if (timeStr.find("pm") != std::string::npos && h != 12) h24 += 12;
+                                if (timeStr.find("am") != std::string::npos && h == 12) h24 = 0;
+
+                                int totalMins = (h24 * 60) + m;
+
+                                // PASSENGER OPERATING HOURS: 05:50am to 11:50pm STRICT
+                                if (totalMins >= 350 && totalMins <= 1430) {
+                                    validTime = true;
+                                }
+                                else {
+                                    std::cout << "Error: Outside operating hours! Passengers allowed 05:50am - 11:50pm.\n";
+                                }
                             }
                         }
                     }
 
                     if (validTime) break;
-                    std::cout << "Invalid time format!.\n";
+                    if (!validTime && timeStr.find(":") != std::string::npos) {
+                        std::cout << "Invalid time format! Minutes must be 00-59.\n";
+                    }
                 }
 
                 while (true) {
@@ -295,7 +316,6 @@ void UIControl::startMenu(SchedRepo& repo, SchedGenerator& generator) {
             int cap = 2; // Default Small
 
             if (action == 'A' || action == 'a') {
-                // Validate Shuttle ID format (Must start with S)
                 while (true) {
                     std::cout << "Enter S.ID (Must start with 'S', e.g., S01): ";
                     std::cin >> id;
@@ -321,10 +341,8 @@ void UIControl::startMenu(SchedRepo& repo, SchedGenerator& generator) {
                     if (hasColon && hasSuffix) {
                         size_t colonPos = timeStr.find(':');
                         std::string hourPart = timeStr.substr(0, colonPos);
-                        // Minutes are everything between the colon and the 2-character suffix (am/pm)
                         std::string minPart = timeStr.substr(colonPos + 1, timeStr.length() - colonPos - 3);
 
-                        // Check if hour and minute strings consist purely of digits
                         auto isDigits = [](const std::string& s) {
                             if (s.empty()) return false;
                             for (char c : s) if (!isdigit(c)) return false;
@@ -335,18 +353,33 @@ void UIControl::startMenu(SchedRepo& repo, SchedGenerator& generator) {
                             int h = std::stoi(hourPart);
                             int m = std::stoi(minPart);
 
-                            bool validHour = (h >= 0 && h <= 12); // Accepts 0-12 (with 0/00 or 12 for midnight)
-                            bool validMin = (m >= 0 && m <= 59);   // Strictly restricts minutes to 00-59
+                            bool validHour = (h >= 0 && h <= 12);
+                            bool validMin = (m >= 0 && m <= 59);
 
                             if (validHour && validMin) {
-                                validTime = true;
+                                int h24 = h;
+                                if (timeStr.find("pm") != std::string::npos && h != 12) h24 += 12;
+                                if (timeStr.find("am") != std::string::npos && h == 12) h24 = 0;
+
+                                int totalMins = (h24 * 60) + m;
+
+                                // SHUTTLE OPERATING HOURS: 06:00am to 00:00am STRICT
+                                if ((totalMins >= 360 && totalMins <= 1439) || totalMins == 0) {
+                                    validTime = true;
+                                }
+                                else {
+                                    std::cout << "Error: Outside operating hours! Shuttles allowed 06:00am - 00:00am.\n";
+                                }
                             }
                         }
                     }
 
                     if (validTime) break;
-                    std::cout << "Invalid time format!.\n";
+                    if (!validTime && timeStr.find(":") != std::string::npos) {
+                        std::cout << "Invalid time format! Minutes must be 00-59.\n";
+                    }
                 }
+
                 std::cout << "Enter Model (Small/Family/Premium): ";
                 std::cin >> capStr;
                 capStr = trim(capStr);
@@ -382,10 +415,8 @@ void UIControl::startMenu(SchedRepo& repo, SchedGenerator& generator) {
                     if (hasColon && hasSuffix) {
                         size_t colonPos = timeStr.find(':');
                         std::string hourPart = timeStr.substr(0, colonPos);
-                        // Minutes are everything between the colon and the 2-character suffix (am/pm)
                         std::string minPart = timeStr.substr(colonPos + 1, timeStr.length() - colonPos - 3);
 
-                        // Check if hour and minute strings consist purely of digits
                         auto isDigits = [](const std::string& s) {
                             if (s.empty()) return false;
                             for (char c : s) if (!isdigit(c)) return false;
@@ -396,17 +427,31 @@ void UIControl::startMenu(SchedRepo& repo, SchedGenerator& generator) {
                             int h = std::stoi(hourPart);
                             int m = std::stoi(minPart);
 
-                            bool validHour = (h >= 0 && h <= 12); // Accepts 0-12 (with 0/00 or 12 for midnight)
-                            bool validMin = (m >= 0 && m <= 59);   // Strictly restricts minutes to 00-59
+                            bool validHour = (h >= 0 && h <= 12);
+                            bool validMin = (m >= 0 && m <= 59);
 
                             if (validHour && validMin) {
-                                validTime = true;
+                                int h24 = h;
+                                if (timeStr.find("pm") != std::string::npos && h != 12) h24 += 12;
+                                if (timeStr.find("am") != std::string::npos && h == 12) h24 = 0;
+
+                                int totalMins = (h24 * 60) + m;
+
+                                // 06:00am to 00:00am 
+                                if ((totalMins >= 360 && totalMins <= 1439) || totalMins == 0) {
+                                    validTime = true;
+                                }
+                                else {
+                                    std::cout << "Error: Outside operating hours! Shuttles allowed 06:00am - 00:00am.\n";
+                                }
                             }
                         }
                     }
 
                     if (validTime) break;
-                    std::cout << "Invalid time format!.\n";
+                    if (!validTime && timeStr.find(":") != std::string::npos) {
+                        std::cout << "Invalid time format! Minutes must be 00-59.\n";
+                    }
                 }
 
                 std::cout << "Enter New Model (Small/Family/Premium): ";
