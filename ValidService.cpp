@@ -5,7 +5,7 @@
 /*
  * ============================================================================
  * Class: ValidService
- * Author: Farid Abqary Bin Zainuddin
+ * Author: Linus Ong Yong Chun
  * Description: Provides static validation services to ensure data integrity
  * for both user RAM inputs and parsed file strings.
  * ============================================================================
@@ -14,7 +14,7 @@
 
  /*
   * Function: isValidTimeFormat
-  * Author: Farid Abqary Bin Zainuddin
+  * Author: Linus Ong Yong Chun
   * Description: Uses Regex to ensure a time string strictly matches the hh:mm(am/pm) format. Time Complexity: O(1)
   * Parameters: timeStr (string)
   * Returns: bool (true if valid)
@@ -27,7 +27,7 @@ bool ValidService::isValidTimeFormat(const std::string& timeStr) {
 
 /*
  * Function: isValidOperatingHour
- * Author: Farid Abqary Bin Zainuddin
+ * Author: Linus Ong Yong Chun
  * Description: Validates that the input time falls within the 6:00am to 00:00am daily operating window. Time Complexity: O(1)
  * Parameters: timeStr (string)
  * Returns: bool
@@ -64,7 +64,7 @@ bool ValidService::isValidShuttleId(const std::string& id) {
 }
 /*
  * Function: capPassengerGroupSize
- * Author: Farid Abqary Bin Zainuddin
+ * Author: Linus Ong Yong Chun
  * Description: Enforces the business rule capping maximum passenger group size to 15. Time Complexity: O(1)
  * Parameters: groupSize (int)
  * Returns: int (capped size)
@@ -82,7 +82,7 @@ int ValidService::capPassengerGroupSize(int groupSize) {
 
 /*
  * Function: mapShuttleModelToCapacity (and mapCapacityToShuttleModel)
- * Author: Farid Abqary Bin Zainuddin
+ * Author: Linus Ong Yong Chun
  * Description: Translates text-based shuttle models (Family, Premium) to numerical seating capacities for the algorithm. Time Complexity: O(1)
  * Parameters: model (string) or capacity (int)
  * Returns: int or string
