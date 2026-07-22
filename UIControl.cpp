@@ -8,7 +8,7 @@
 /*
  * ============================================================================
  * Class: UIControl
- * Author: Farid Abqary Bin Zainuddin
+ * Author: Linus Ong Yong Chun
  * Description: Manages the interactive command-line interface, user prompts,
  * and overarching menu loops.
  * ============================================================================
@@ -16,7 +16,7 @@
 
  /*
   * Function: getInstance
-  * Author: Farid Abqary Bin Zainuddin
+  * Author: Linus Ong Yong Chun
   * Description: Thread-safe and memory-safe Singleton access point for the UI controller. Time Complexity: O(1)
   * Parameters: None
   * Returns: UIControl& (Reference to singleton instance)
@@ -53,7 +53,7 @@ void UIControl::displayMatches(const SchedRepo& repo) const {
 
 /*
  * Function: startMenu
- * Author: Farid Abqary Bin Zainuddin
+ * Author: Linus Ong Yong Chun
  * Description: The primary interactive terminal loop allowing users to trigger scheduling, edit RAM entities, and save data. Time Complexity: O(N) per user action.
  * Parameters: repo (SchedRepo&), generator (SchedGenerator&)
  * Returns: void
