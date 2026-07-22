@@ -4,7 +4,7 @@
 /*
  * ============================================================================
  * Class: Entity
- * Author: Leong Ming Foong
+ * Author: Farid Abqary
  * Description: Abstract base class defining common attributes (ID, destination,
  * time) and polymorphic interfaces for all transport entities.
  * ============================================================================
